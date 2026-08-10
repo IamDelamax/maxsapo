@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout title="Now — Max Sapo">
+  <PageHeader
+    eyebrow="Now"
+    title="What I am focused on now."
+    lede="A lightweight status page. Updated when reality changes, which is rude but frequent."
+  />
+  <section class="container prose">
+    <p><strong>Updated:</strong> August 2026</p>
+    <h2>Work</h2>
+    <p>
+      Focused on AI infrastructure and TPU performance: how compute, latency, efficiency, and developer experience translate into product capability.
+    </p>
+    <h2>Writing</h2>
+    <p>
+      Drafting notes on AI interfaces, product leadership in infrastructure-heavy domains, and the emotional/behavioral side of working with intelligent systems.
+    </p>
+    <h2>Questions I am sitting with</h2>
+    <ul>
+      <li>What is the right interface for persistent AI collaborators?</li>
+      <li>How do AI infrastructure constraints shape product strategy?</li>
+      <li>What does excellent product taste look like when models are the medium?</li>
+    </ul>
+  </section>
+</BaseLayout>

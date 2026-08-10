@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CardGrid from '../components/CardGrid.astro';
+import { highlights, site } from '../data/site';
+
+const focusAreas = [
+  {
+    title: 'AI infrastructure',
+    description: 'Product work around compute, performance, ML systems, and the invisible machinery that makes intelligence usable at scale.',
+    meta: 'Systems',
+    href: '/work',
+  },
+  {
+    title: 'Human AI interfaces',
+    description: 'Real-time avatars, agents, companions, and the next generation of software that feels less like tools and more like collaborators.',
+    meta: 'Interfaces',
+    href: '/work',
+  },
+  {
+    title: 'Operator lessons',
+    description: 'Notes from building, fundraising, leading teams, navigating ambiguity, and occasionally learning things the expensive way.',
+    meta: 'Writing',
+    href: '/writing',
+  },
+];
+
+const proof = [
+  { label: 'Current focus', value: 'TPU performance and AI infrastructure' },
+  { label: 'Company', value: 'Founder, Happyverse.AI' },
+  { label: 'Background', value: 'Google · Stanford MBA · CFA · Finance' },
+  { label: 'Based in', value: site.location },
+];
+---
+<BaseLayout>
+  <section class="container hero">
+    <div>
+      <p class="eyebrow">AI product leader · founder · operator</p>
+      <h1>Building where intelligence meets interface.</h1>
+      <p class="lede">
+        I work on AI infrastructure, human-computer interfaces, and products that turn frontier technology into things people actually use.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="/writing">Read the notes</a>
+        <a class="button" href="/work">See the work</a>
+        <a class="button" href="/contact">Get in touch</a>
+      </div>
+      <ul class="kicker-list">
+        {highlights.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+    <aside class="hero-card" aria-label="Quick facts">
+      <ul class="stat-list">
+        {proof.map((item) => (
+          <li>
+            <span class="stat-label">{item.label}</span>
+            <span class="stat-value">{item.value}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </section>
+
+  <section class="container section">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Focus</p>
+        <h2>What I think about</h2>
+      </div>
+      <p>Mostly the messy middle: where deep tech, product judgment, people, markets, and taste collide.</p>
+    </div>
+    <CardGrid items={focusAreas} />
+  </section>
+
+  <section class="container section">
+    <div class="grid two">
+      <div class="feature-card">
+        <p class="eyebrow">Current</p>
+        <h2>AI infrastructure is becoming product strategy.</h2>
+        <p>
+          Compute, latency, model quality, cost curves, and developer experience are no longer backend details. They shape what products can exist — and which companies win.
+        </p>
+      </div>
+      <div class="feature-card">
+        <p class="eyebrow">Long arc</p>
+        <h2>The interface to AGI will not look like a dashboard.</h2>
+        <p>
+          The next leap is not just smarter models. It is more natural, persistent, multimodal relationships between humans and software.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

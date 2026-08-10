@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const projects = (await getCollection('projects')).filter((item) => !item.data.draft);
+---
+<BaseLayout title="Work — Max Sapo">
+  <PageHeader
+    eyebrow="Work"
+    title="Selected work across AI, product, and markets."
+    lede="A few projects and roles that shaped how I think about infrastructure, interfaces, companies, and capital."
+  />
+  <section class="container grid two">
+    {projects.map((project) => (
+      <article class="card">
+        <div class="card-meta">{project.data.role} · {project.data.period}</div>
+        <h3>{project.data.title}</h3>
+        <p>{project.data.description}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

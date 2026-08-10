@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const talks = (await getCollection('speaking')).filter((talk) => !talk.data.draft);
+---
+<BaseLayout title="Speaking — Max Sapo">
+  <PageHeader
+    eyebrow="Speaking"
+    title="Talks, panels, and conversations."
+    lede="Mostly around AI interfaces, product strategy, infrastructure, and what happens when software starts talking back."
+  />
+  <section class="container grid two">
+    {talks.map((talk) => (
+      <article class="card">
+        <div class="card-meta">{talk.data.event}</div>
+        <h3>{talk.data.title}</h3>
+        <p>{talk.data.description}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

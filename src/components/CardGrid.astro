@@ -1,0 +1,22 @@
+---
+interface Item {
+  title: string;
+  description: string;
+  meta?: string;
+  href?: string;
+}
+interface Props {
+  items: Item[];
+  columns?: 'two' | 'three';
+}
+const { items, columns = 'three' } = Astro.props;
+---
+<div class={`grid ${columns}`}>
+  {items.map((item) => (
+    <a class="card" href={item.href ?? '#'}>
+      {item.meta && <div class="card-meta">{item.meta}</div>}
+      <h3>{item.title}</h3>
+      <p>{item.description}</p>
+    </a>
+  ))}
+</div>

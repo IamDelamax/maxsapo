@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const posts = (await getCollection('writing'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Writing — Max Sapo">
+  <PageHeader
+    eyebrow="Writing"
+    title="Notes on AI, products, and operating."
+    lede="Short essays and working notes. Some polished, some deliberately alive."
+  />
+  <section class="container grid two">
+    {posts.map((post) => (
+      <a class="card" href={`/writing/${post.id.replace(/\.(md|mdx)$/, '')}`}>
+        <div class="card-meta">{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+        <h3>{post.data.title}</h3>
+        <p>{post.data.description}</p>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
