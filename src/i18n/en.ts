@@ -1,0 +1,330 @@
+import { site } from '../data/site';
+
+export const en = {
+  code: 'en' as const,
+  htmlLang: 'en',
+  alt: { code: 'ru', label: 'RU', title: 'Читать по-русски' },
+  prefix: '',
+
+  nav: [
+    { label: 'Life', href: '/#life' },
+    { label: 'Work', href: '/work' },
+    { label: 'Watch', href: '/watch' },
+    { label: 'Now', href: '/now' },
+  ],
+
+  meta: {
+    title: 'Max Sapo — Google Cloud TPU, founder, CFA, rapper',
+    description:
+      'Max Sapo (Delamax): Senior PM on Google Cloud TPU, founder of Happyverse.AI, ex-Etched, CFA charterholder, and a rapper since 2003. Love, health, work, wealth — all four, on the record.',
+    ogAlt: 'Max Sapo',
+  },
+
+  hero: {
+    eyebrow: 'Siberia → Moscow → Stanford → San Francisco',
+    title: 'I spent four years making Google’s TPUs sell.',
+    titleAccent: 'Then I left to build the face on top of them — and in May 2026 I came back to the silicon.',
+    lede:
+      'Senior Product Manager on Google Cloud TPU. Founder of Happyverse.AI, where we built real-time video agents on a pre-seed from Village Global and Jeff Dean. In between: a transformer chip at Etched, a $355M IPO at Sistema, a CFA charter, and thirty-odd rap tracks as Delamax. I do not keep those lives in separate folders.',
+    ctas: [
+      { label: 'Watch me talk', href: '/watch', primary: true },
+      { label: 'The receipts', href: '/work', primary: false },
+      { label: 'Pitch me an idea', href: `mailto:${site.email}`, primary: false },
+    ],
+    portraitAlt: 'Max Sapo',
+    portraitCaption: 'San Francisco, CA',
+  },
+
+  stats: [
+    { value: '4', label: 'generations of Google TPU taken to market' },
+    { value: '$355M', label: 'IPO led at Sistema — Detsky Mir, 2017' },
+    { value: '30+', label: 'tracks recorded as Delamax since 2003' },
+    { value: '4', label: 'things founded: Happyverse, Power Couple Club, finetuned.me, MLHappy' },
+  ],
+
+  pillars: {
+    eyebrow: 'The whole picture',
+    title: 'Four dials, not one.',
+    lede:
+      'At Happyverse I built HIPERFLOW — nine dials that decide how a life actually feels: health, intelligence, productivity, emotions, relationships, freedom, love, employment, wealth. Four of them do most of the work. I run my own life on them, so this site is organised the same way.',
+    items: [
+      {
+        key: 'love',
+        label: 'Love',
+        title: 'Ambition is easier in pairs.',
+        body:
+          'I run Power Couple Club — a private club in San Francisco and Los Angeles for people who refuse to choose between a career and a life. Curated dinners, real introductions, none of the networking-event energy. The premise is simple: the person next to you compounds faster than any portfolio.',
+        proof: ['Power Couple Club — SF & LA', 'Curated dinners, vetted membership'],
+        link: { label: 'powercoupleclub.com', href: site.ventures.powercouple },
+      },
+      {
+        key: 'health',
+        label: 'Health',
+        title: 'You cannot out-think a body you are wrecking.',
+        body:
+          'finetuned.me is a four-day reset on a private 40-acre desert estate in California — sixteen people, October 1–5, 2026. Move, eat, talk, sleep, leave different. It grew out of MLHappy.org, the non-profit I started to put AI behind well-being instead of engagement metrics.',
+        proof: ['finetuned.me — Oct 1–5, 2026', '16 people, 40 acres, no phones on the agenda'],
+        link: { label: 'finetuned.me', href: site.ventures.finetuned },
+      },
+      {
+        key: 'work',
+        label: 'Work',
+        title: 'The silicon, the face on top, and back to the silicon.',
+        body:
+          'Google Cloud TPU: v4 Pods, v5e, v5p, Trillium — I ran growth and strategy for the machines that trained the models everyone now argues about, and I am back on them today. Etched: a one-month sprint with 30+ engineers to get Sohu, a transformer-only inference chip, through tapeout. Happyverse: the layer on top — AI that holds a real-time conversation with your face and your judgment. Very few people have stood at all three altitudes.',
+        proof: ['Google Cloud TPU — Senior PM', 'Founder, Happyverse.AI · ex-Etched'],
+        link: { label: 'The full record', href: '/work' },
+      },
+      {
+        key: 'wealth',
+        label: 'Wealth',
+        title: 'I did finance properly before I did tech.',
+        body:
+          'CFA charterholder. Six years at Sistema as Investment Director, where I led the $355M IPO of Detsky Mir and a turnaround that grew equity value about fivefold. Investment banking at VTB Capital and ING before that. Now I write angel cheques: Alma, Electric Fish, CloudThread (YC ’22), BitRiver, GSB 2020 Fund.',
+        proof: ['CFA charterholder', 'Angel investor since 2017'],
+        link: { label: 'The full record', href: '/work' },
+      },
+    ],
+  },
+
+  delamax: {
+    eyebrow: 'The other name',
+    title: 'Delamax',
+    lede:
+      'I have been writing and recording since 2003. Self-taught guitar, self-taught production, self-shot videos. Winner of my college Rap Music Award in 2007. When Harvard Business School asked for a video essay, I sent them a rap — the one below. It is not a hobby I keep quiet about; it is the reason I am any good at pitching.',
+    facts: [
+      { value: '2003', label: 'first track' },
+      { value: '30+', label: 'recorded' },
+      { value: '2007', label: 'college Rap Music Award' },
+    ],
+    cta: { label: 'Watch the videos', href: '/watch#music' },
+  },
+
+  watch: {
+    eyebrow: 'On camera',
+    title: 'Talks, interviews, demos, and one MBA application that rhymes.',
+    lede:
+      'Everything here is public and verified — pulled straight from my channel and the Happyverse channel. If you have hosted me somewhere that is missing, send the link.',
+    sections: {
+      talks: { title: 'Talks & conversations', lede: 'Where I get asked the hard questions.' },
+      product: { title: 'What we are building', lede: 'Happyverse, on the record.' },
+      music: { title: 'Delamax', lede: 'The one I do not put on the CV. Except I do.' },
+    },
+    notes: {
+      'bay-signal':
+        'The Bay Signal, episode one: Happyverse, Stanford, and what it actually takes to build AI avatars in San Francisco.',
+      'aizada-marat':
+        'A long-form conversation (in Russian) with Aizada Marat about the Stanford MBA and the road that led there.',
+      'agi-summit':
+        'The summit I built and hosted in San Francisco, November 2025 — one question all day: if intelligence gets cheap, what does the interface look like?',
+      'ai-coaching':
+        'A long conversation about what AI can and cannot do inside a coaching relationship.',
+      chakroff:
+        'Sitting down with Alek Chakroff on the coach we built and what a machine understands about a person.',
+      'uncanny-valley':
+        'A hard technical review of the open-source stack for real-time AI clones, with Vladimir Shakirov.',
+      'digital-human':
+        'The product itself: a real-time digital human you can interrupt.',
+      duttweiler:
+        'We rebuilt Migros founder Gottlieb Duttweiler as a digital twin for the company’s 100th anniversary.',
+      'website-avatars': 'Putting a face on a website that answers back.',
+      'hbs-essay':
+        'Harvard Business School asked for a video essay in 2016. I rapped it.',
+      'den-goroda': 'Delamax and Naomi, live, 2013.',
+      'lion-promo': 'Concert promo, 2013.',
+      'happyverse-rap': 'Yes, I wrote a rap about my own company. No, I do not regret it.',
+    },
+    watchOn: 'Watch on YouTube',
+  },
+
+  work: {
+    eyebrow: 'Work',
+    title: 'Twelve years of receipts.',
+    lede:
+      'Six years building AI products across ML infrastructure and GenAI. Eight years before that investing other people’s money and answering for it. The order matters: I learned to read a P&L before I learned to read a kernel.',
+    experienceTitle: 'Experience',
+    experience: [
+      {
+        org: 'Google',
+        role: 'Senior Product Manager — Cloud TPU',
+        period: 'May 2026 — now',
+        href: 'https://cloud.google.com/tpu',
+        body:
+          'Back on AI infrastructure: the compute layer that decides what every model above it is allowed to be. Same machines, a very different industry around them.',
+        bullets: [],
+      },
+      {
+        org: 'Happyverse.AI',
+        role: 'Founder',
+        period: '2025 — now',
+        href: site.ventures.happyverse,
+        body:
+          'I started the product and research lab behind Happyverse Confidants — real-time video agents that represent a person when that person cannot be in the room. Pre-seed funded by Village Global and Jeff Dean. I founded it and still own the vision; I am no longer running it day to day.',
+        bullets: [
+          'Built and hosted the AGI Interface Summit in San Francisco, November 2025.',
+          'Shipped a real-time digital-human product used for brand, sales, and commemorative digital twins.',
+          'Designed HIPERFLOW, the nine-dial life-design framework behind the product.',
+        ],
+      },
+      {
+        org: 'Etched',
+        role: 'AI Product Manager, Member of Technical Staff',
+        period: '2024 — 2025',
+        href: 'https://etched.com',
+        body:
+          'A Series A company building transformer-only inference silicon aimed at 10x+ over Nvidia GPUs.',
+        bullets: [
+          'Ran a one-month sprint with 30+ engineers to find and clear hardware and software bugs ahead of the Sohu tapeout.',
+          'Ran the market study and benchmarking that shaped requirements for the next-generation chip.',
+          'Orchestrated an eight-figure deal with a leading European cloud provider.',
+        ],
+      },
+      {
+        org: 'Google',
+        role: 'Senior Product Manager — Head of Growth & Strategy, Cloud TPU',
+        period: '2019; 2020 — 2024',
+        href: 'https://cloud.google.com/tpu',
+        body:
+          'Growth, strategy, and go-to-market for the supercomputers Google uses to train and serve large models.',
+        bullets: [
+          'Led the commercial launches of Cloud TPU v4 Pods (2022), v5e (2023), v5p (2023) and Trillium (2024).',
+          'Co-authored Google’s ML infrastructure investment strategy and the financial model behind billions in capex.',
+          'Co-led the Cloud TPU VM architecture launch that made the machines usable by ordinary researchers.',
+          'Built the go-to-market motion behind billions in customer commitments.',
+          'Ran GenAI projects for Beyond 12, Opportunity@Work and IDinsight through the Google.org accelerator, and headlined the Google.org Impact Summit.',
+          'Two promotions and 70+ peer bonuses, including from Chief AI Scientist Jeff Dean.',
+        ],
+      },
+      {
+        org: 'Pomegranate VC',
+        role: 'Summer Vice President, Consumer Tech',
+        period: '2020',
+        href: 'https://www.crunchbase.com/organization/pomegranate-ventures',
+        body: 'Late-stage fund. Structured secondary deals in consumer internet, including Calm and Notion.',
+        bullets: [],
+      },
+      {
+        org: 'Sistema',
+        role: 'Investment Director, Consumer Goods & Retail',
+        period: '2012 — 2018',
+        href: 'https://sistema.com/',
+        body:
+          'The largest investment fund in Eastern Europe by AUM. I owned Detsky Mir, its children’s-goods retailer, end to end.',
+        bullets: [
+          'Led the $355M IPO and a $150M fundraising round, running the deal across C-level executives, global banks and law firms.',
+          'Supervised the turnaround from a loss-making asset to a profitable, IPO-ready market leader — roughly fivefold equity value growth from 2012 to 2018.',
+        ],
+      },
+      {
+        org: 'ING · VTB Capital',
+        role: 'Investment Banking Analyst',
+        period: '2010 — 2012',
+        href: '',
+        body: 'M&A and IPO work across retail, industrial engineering, healthcare and TMT.',
+        bullets: [],
+      },
+    ],
+    educationTitle: 'Education & credentials',
+    education: [
+      {
+        org: 'Georgia Tech',
+        role: 'MSc, Computer Science — Machine Learning & Human-Computer Interaction',
+        period: '2024 — present',
+      },
+      {
+        org: 'Stanford GSB · Doerr School of Sustainability',
+        role: 'MBA / MS',
+        period: '2018 — 2020',
+      },
+      {
+        org: 'CFA Institute',
+        role: 'Chartered Financial Analyst',
+        period: '2016 — 2018',
+      },
+      {
+        org: 'MGIMO University, Moscow',
+        role: 'BA, Economics & International Relations — top of class, gold medal',
+        period: '2007 — 2011',
+      },
+    ],
+    angelTitle: 'Angel investments',
+    angel: [
+      { name: 'Alma', href: 'https://www.tryalma.ai/' },
+      { name: 'Electric Fish', href: 'https://electricfish.co/' },
+      { name: 'CloudThread (YC ’22)', href: 'https://www.ycombinator.com/companies/cloudthread' },
+      { name: 'BitRiver', href: '' },
+      { name: 'GSB 2020 Fund', href: 'https://gsbuilds.co/class-funds' },
+    ],
+  },
+
+  now: {
+    eyebrow: 'Now',
+    title: 'What I am actually doing this season.',
+    lede:
+      'A now page, in the Derek Sivers sense: what has my attention right now, not a highlight reel. Last reviewed August 2026.',
+    items: [
+      {
+        title: 'Back on Cloud TPU at Google',
+        body:
+          'I rejoined in May 2026. Two years away from the inside of AI infrastructure turned out to be the best possible preparation for coming back to it — I have now been a customer, a competitor, and a builder of the layer on top.',
+      },
+      {
+        title: 'Happyverse, from the founder seat',
+        body:
+          'Real-time video agents that hold a conversation as you. I am not running it day to day any more, but the thesis has not changed: the hard part was never the model — it is trust, latency, and knowing when the agent should shut up and hand back to the human.',
+      },
+      {
+        title: 'Filling finetuned.me',
+        body:
+          'Sixteen seats, October 1–5, 2026, forty acres of California desert. Four days built to reset people who cannot sit still.',
+      },
+      {
+        title: 'Growing Power Couple Club',
+        body: 'San Francisco and Los Angeles. Dinners, introductions, and a membership bar that stays high.',
+      },
+      {
+        title: 'Finishing the Georgia Tech MSc',
+        body: 'Machine learning and human-computer interaction, part-time, online, at night.',
+      },
+      {
+        title: 'Recording again',
+        body: 'New Delamax material. Slower than I would like.',
+      },
+    ],
+  },
+
+  contact: {
+    eyebrow: 'Say hello',
+    title: 'I answer email.',
+    lede:
+      'Building something at the interface of AI and people? Want to speak at the next summit, take a finetuned.me seat, or argue with me about whether TPUs win? Write.',
+    emailLabel: 'Email',
+    links: [
+      { label: 'LinkedIn', href: site.social.linkedin },
+      { label: 'Instagram — @delamax', href: site.social.instagram },
+      { label: 'YouTube', href: site.social.youtube },
+      { label: 'X', href: site.social.x },
+      { label: 'GitHub', href: site.social.github },
+    ],
+    venturesTitle: 'Ventures',
+    ventures: [
+      { label: 'Happyverse.AI', href: site.ventures.happyverse },
+      { label: 'AGI Interface Summit', href: site.ventures.summit },
+      { label: 'finetuned.me', href: site.ventures.finetuned },
+      { label: 'Power Couple Club', href: site.ventures.powercouple },
+    ],
+  },
+
+  footer: {
+    tagline: 'Founder · ex-Google TPU · CFA · Delamax',
+    rights: 'All rights reserved.',
+  },
+
+  notFound: {
+    title: 'This page does not exist.',
+    lede: 'It happens. Try the front door.',
+    cta: 'Back home',
+  },
+};
+
+export type Content = typeof en;

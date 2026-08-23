@@ -1,0 +1,37 @@
+---
+// Click-to-play facade: loads only a thumbnail until the user clicks.
+// Keeps the page fast even with a dozen videos on it.
+interface Props {
+  youtubeId: string;
+  title: string;
+}
+const { youtubeId, title } = Astro.props;
+const thumb = `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+---
+<div class="yt-embed" data-yt-id={youtubeId}>
+  <button class="yt-facade" aria-label={`Play: ${title}`}>
+    <img src={thumb} alt={title} loading="lazy" width="480" height="360" />
+    <span class="yt-play" aria-hidden="true">
+      <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74a8 8 0 0 0-5.63-5.66C55.94.5 34 .5 34 .5s-21.94 0-26.89 1.58A8 8 0 0 0 1.48 7.74 83.2 83.2 0 0 0 0 24a83.2 83.2 0 0 0 1.48 16.26 8 8 0 0 0 5.63 5.66C12.06 47.5 34 47.5 34 47.5s21.94 0 26.89-1.58a8 8 0 0 0 5.63-5.66A83.2 83.2 0 0 0 68 24a83.2 83.2 0 0 0-1.48-16.26z" fill="currentColor"/><path d="M45 24 27 14v20" fill="#0a0908"/></svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  function setupYtFacades() {
+    document.querySelectorAll<HTMLElement>('.yt-embed:not([data-yt-ready])').forEach((el) => {
+      el.dataset.ytReady = '1';
+      el.querySelector('.yt-facade')?.addEventListener('click', () => {
+        const id = el.dataset.ytId;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+        iframe.title = el.querySelector('img')?.alt ?? 'YouTube video';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        el.replaceChildren(iframe);
+      });
+    });
+  }
+  setupYtFacades();
+  document.addEventListener('astro:page-load', setupYtFacades);
+</script>
