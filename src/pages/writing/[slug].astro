@@ -1,20 +1,92 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('writing')).filter((post) => !post.data.draft);
-  return posts.map((post) => ({ params: { slug: post.id.replace(/\.(md|mdx)$/, '') }, props: { post } }));
+  const posts = (await getCollection('writing'))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return posts.map((post, index) => ({
+    params: { slug: post.id.replace(/\.(md|mdx)$/, '') },
+    props: {
+      post,
+      prevPost: index < posts.length - 1 ? posts[index + 1] : null,
+      nextPost: index > 0 ? posts[index - 1] : null,
+    },
+  }));
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
+
+const words = post.body ? post.body.trim().split(/\s+/).length : 0;
+const readingTime = Math.max(1, Math.ceil(words / 200));
+const postSlug = post.id.replace(/\.(md|mdx)$/, '');
+const postUrl = new URL(`/writing/${postSlug}/`, site.url).toString();
+
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  url: postUrl,
+  author: {
+    '@type': 'Person',
+    name: site.name,
+    url: site.url,
+  },
+  keywords: post.data.tags,
+};
 ---
-<BaseLayout title={`${post.data.title} — Max Sapo`} description={post.data.description}>
-  <article class="container prose">
-    <p class="eyebrow">{post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-    <h1>{post.data.title}</h1>
-    <p class="lede">{post.data.description}</p>
-    <Content />
+<BaseLayout title={`${post.data.title} — Max Sapo`} description={post.data.description} type="article">
+  <article class="container prose article-page">
+    <div class="article-header">
+      <a href="/writing" class="back-link">← All writing</a>
+      <div class="article-meta">
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        <span class="dot">·</span>
+        <span>{readingTime} min read</span>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="lede">{post.data.description}</p>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="tag-list">
+          {post.data.tags.map((tag: string) => (
+            <span class="tag-pill">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <div class="article-pagination">
+      <div class="pagination-col">
+        {prevPost && (
+          <a class="pagination-card" href={`/writing/${prevPost.id.replace(/\.(md|mdx)$/, '')}`}>
+            <span class="pagination-direction">← Previous essay</span>
+            <span class="pagination-title">{prevPost.data.title}</span>
+          </a>
+        )}
+      </div>
+      <div class="pagination-col next">
+        {nextPost && (
+          <a class="pagination-card" href={`/writing/${nextPost.id.replace(/\.(md|mdx)$/, '')}`}>
+            <span class="pagination-direction">Next essay →</span>
+            <span class="pagination-title">{nextPost.data.title}</span>
+          </a>
+        )}
+      </div>
+    </div>
   </article>
+
+  <!-- Article JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
 </BaseLayout>

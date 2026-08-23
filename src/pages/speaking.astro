@@ -13,10 +13,30 @@ const talks = (await getCollection('speaking')).filter((talk) => !talk.data.draf
   />
   <section class="container grid two">
     {talks.map((talk) => (
-      <article class="card">
-        <div class="card-meta">{talk.data.event}</div>
+      <article class="card speaking-card">
+        <div class="card-meta">
+          <span>{talk.data.event}</span>
+          {talk.data.location && <span> · {talk.data.location}</span>}
+          {talk.data.date && (
+            <span> · {talk.data.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+          )}
+        </div>
         <h3>{talk.data.title}</h3>
         <p>{talk.data.description}</p>
+        {(talk.data.slidesUrl || talk.data.videoUrl) && (
+          <div class="card-actions">
+            {talk.data.videoUrl && (
+              <a href={talk.data.videoUrl} target="_blank" rel="noopener noreferrer" class="link-btn">
+                Watch Recording ↗
+              </a>
+            )}
+            {talk.data.slidesUrl && (
+              <a href={talk.data.slidesUrl} target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                View Slides ↗
+              </a>
+            )}
+          </div>
+        )}
       </article>
     ))}
   </section>

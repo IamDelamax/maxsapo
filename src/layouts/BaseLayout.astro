@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { navigation, site } from '../data/site';
 import MobileNav from '../components/MobileNav.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -64,6 +65,8 @@ const jsonLd = {
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <ClientRouter />
 
     <title>{title}</title>
   </head>

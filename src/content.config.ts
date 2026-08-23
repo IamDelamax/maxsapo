@@ -9,6 +9,7 @@ const writing = defineCollection({
     date: z.coerce.date(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
+    canonicalUrl: z.string().optional(),
   }),
 });
 
@@ -19,6 +20,9 @@ const projects = defineCollection({
     description: z.string(),
     role: z.string(),
     period: z.string(),
+    url: z.string().optional(),
+    github: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),
 });
@@ -30,6 +34,9 @@ const speaking = defineCollection({
     description: z.string(),
     event: z.string(),
     date: z.coerce.date().optional(),
+    location: z.string().optional(),
+    slidesUrl: z.string().optional(),
+    videoUrl: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

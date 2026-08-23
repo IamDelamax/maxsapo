@@ -13,10 +13,24 @@ const projects = (await getCollection('projects')).filter((item) => !item.data.d
   />
   <section class="container grid two">
     {projects.map((project) => (
-      <article class="card">
+      <article class="card project-card">
         <div class="card-meta">{project.data.role} · {project.data.period}</div>
         <h3>{project.data.title}</h3>
         <p>{project.data.description}</p>
+        {(project.data.url || project.data.github) && (
+          <div class="card-actions">
+            {project.data.url && (
+              <a href={project.data.url} target="_blank" rel="noopener noreferrer" class="link-btn">
+                Visit Project ↗
+              </a>
+            )}
+            {project.data.github && (
+              <a href={project.data.github} target="_blank" rel="noopener noreferrer" class="link-btn secondary">
+                GitHub ↗
+              </a>
+            )}
+          </div>
+        )}
       </article>
     ))}
   </section>
