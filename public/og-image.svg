@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="bgGrad1" cx="10%" cy="10%" r="50%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#07080a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bgGrad2" cx="90%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#f4b45f" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#07080a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#07080a"/>
+  <rect width="1200" height="630" fill="url(#bgGrad1)"/>
+  <rect width="1200" height="630" fill="url(#bgGrad2)"/>
+
+  <!-- Card Border -->
+  <rect x="60" y="60" width="1080" height="510" rx="24" fill="url(#panelGrad)" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- Logo Mark -->
+  <circle cx="120" cy="130" r="10" fill="#f4b45f"/>
+  <text x="146" y="138" fill="#f4f1ea" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700">Max Sapo</text>
+
+  <!-- Eyebrow -->
+  <text x="120" y="230" fill="#f4b45f" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" letter-spacing="3">AI PRODUCT LEADER · FOUNDER · OPERATOR</text>
+
+  <!-- Headline -->
+  <text x="120" y="310" fill="#f4f1ea" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1.5">Building where intelligence</text>
+  <text x="120" y="375" fill="#f4f1ea" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1.5">meets interface.</text>
+
+  <!-- Lede -->
+  <text x="120" y="445" fill="#a9a49a" font-family="system-ui, -apple-system, sans-serif" font-size="22">AI Infrastructure · Conversational Systems · Product Leadership · Strategy</text>
+
+  <!-- Footer URL -->
+  <text x="120" y="515" fill="#6f6a61" font-family="system-ui, -apple-system, sans-serif" font-size="20">maxsapo.me</text>
+</svg>
