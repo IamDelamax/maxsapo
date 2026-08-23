@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "maxsapo-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/maxsapo/CascadeProjects/maxsapo", "run", "dev"],
+      "port": 4321
+    }
+  ]
+}

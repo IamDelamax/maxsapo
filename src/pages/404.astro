@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { en } from '../i18n';
 ---
-<BaseLayout title="404 — Max Sapo">
+<BaseLayout>
   <section class="container page-heading">
-    <p class="eyebrow">404</p>
-    <h1>Nothing here yet.</h1>
-    <p class="lede">Either the page moved or the robots ate it. Start from the homepage.</p>
-    <div class="actions"><a class="button primary" href="/">Go home</a></div>
+    <h1>{en.notFound.title}</h1>
+    <p class="lede">{en.notFound.lede}</p>
+    <div class="actions">
+      <a class="button primary" href="/">{en.notFound.cta}</a>
+    </div>
   </section>
 </BaseLayout>

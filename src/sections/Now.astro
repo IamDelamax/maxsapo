@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getContent, type Lang } from '../i18n';
+import { site } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getContent(lang);
+---
+<BaseLayout lang={lang} title={`${t.now.title} — Max Sapo`} description={t.now.lede}>
+  <PageHeader eyebrow={t.now.eyebrow} title={t.now.title} lede={t.now.lede} />
+  <section class="container section">
+    <div class="now-list">
+      {t.now.items.map((item) => (
+        <article class="now-item">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section contact-band" id="contact">
+    <p class="eyebrow">{t.contact.eyebrow}</p>
+    <h2>{t.contact.title}</h2>
+    <p class="lede">{t.contact.lede}</p>
+    <div class="actions">
+      <a class="button primary" href={`mailto:${site.email}`}>{t.contact.emailLabel} — {site.email}</a>
+    </div>
+    <div class="contact-cols">
+      <div>
+        <ul class="contact-list">
+          {t.contact.links.map((l) => (
+            <li><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="block-title">{t.contact.venturesTitle}</p>
+        <ul class="contact-list">
+          {t.contact.ventures.map((l) => (
+            <li><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

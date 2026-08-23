@@ -1,11 +1,15 @@
 ---
-import { navigation, site } from '../data/site';
+import { site } from '../data/site';
+import { getContent, altHref, type Lang } from '../i18n';
 
 interface Props {
   currentPath: string;
+  lang?: Lang;
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, lang = 'en' } = Astro.props;
+const t = getContent(lang);
+const switchHref = altHref(lang, currentPath);
 ---
 
 <div class="mobile-nav-wrapper">
@@ -26,14 +30,10 @@ const { currentPath } = Astro.props;
     <div class="mobile-menu-content">
       <div class="mobile-menu-header">
         <span class="logo">
-          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-mark" aria-hidden="true">MS</span>
           <span>Max Sapo</span>
         </span>
-        <button
-          id="mobile-menu-close"
-          class="mobile-menu-close"
-          aria-label="Close menu"
-        >
+        <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -42,8 +42,9 @@ const { currentPath } = Astro.props;
       </div>
 
       <nav class="mobile-nav-links" aria-label="Mobile navigation">
-        {navigation.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        {t.nav.map((item) => {
+          const base = item.href.split('#')[0];
+          const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);
           return (
             <a
               href={item.href}
@@ -54,13 +55,14 @@ const { currentPath } = Astro.props;
             </a>
           );
         })}
+        <a href={switchHref} class="mobile-nav-link" title={t.alt.title}>{t.alt.label}</a>
       </nav>
 
       <div class="mobile-menu-footer">
-        <p class="mobile-footer-title">Connect</p>
         <div class="mobile-social-links">
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href={site.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
           <a href={`mailto:${site.email}`}>Email</a>
         </div>
       </div>
@@ -100,10 +102,7 @@ const { currentPath } = Astro.props;
 
     closeBtn?.addEventListener('click', closeMenu);
     backdrop?.addEventListener('click', closeMenu);
-
-    links.forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
+    links.forEach((link) => link.addEventListener('click', closeMenu));
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.classList.contains('is-open')) {
@@ -113,9 +112,6 @@ const { currentPath } = Astro.props;
     });
   }
 
-  // Setup on initial load
   setupMobileNav();
-
-  // Re-setup on page transitions if ClientRouter is used
   document.addEventListener('astro:page-load', setupMobileNav);
 </script>

@@ -1,10 +1,12 @@
 ---
 import '../styles/global.css';
-import { navigation, site } from '../data/site';
+import { site } from '../data/site';
+import { getContent, altHref, type Lang } from '../i18n';
 import MobileNav from '../components/MobileNav.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
   image?: string;
@@ -12,41 +14,50 @@ interface Props {
 }
 
 const {
-  title = site.title,
-  description = site.description,
+  lang = 'en',
+  title: titleProp,
+  description: descriptionProp,
   image = '/og-image.png',
   type = 'website',
 } = Astro.props;
 
+const t = getContent(lang);
+const title = titleProp ?? t.meta.title;
+const description = descriptionProp ?? t.meta.description;
+
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogImageUrl = new URL(image, site.url).toString();
 const currentPath = Astro.url.pathname;
+const switchHref = altHref(lang, currentPath);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
+  alternateName: 'Delamax',
   url: site.url,
-  jobTitle: 'AI Product Leader & Founder',
-  description: site.description,
+  jobTitle: 'Senior Product Manager, Google Cloud TPU · Founder, Happyverse.AI',
+  description: t.meta.description,
   sameAs: [
     site.social.linkedin,
+    site.social.instagram,
+    site.social.youtube,
+    site.social.x,
     site.social.github,
   ].filter(Boolean),
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#07080a" />
+    <meta name="theme-color" content="#0a0908" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.name} — Writing`} href="/rss.xml" />
+    <link rel="alternate" hreflang={lang === 'en' ? 'ru' : 'en'} href={new URL(switchHref, site.url).toString()} />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -55,15 +66,13 @@ const jsonLd = {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={t.meta.ogAlt} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <ClientRouter />
@@ -73,13 +82,14 @@ const jsonLd = {
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href="/" aria-label="Max Sapo home">
-          <span class="logo-mark" aria-hidden="true"></span>
-          <span>Max Sapo</span>
+        <a class="logo" href={lang === 'ru' ? '/ru/' : '/'} aria-label="Max Sapo home">
+          <span class="logo-mark" aria-hidden="true">MS</span>
+          <span class="logo-name">Max Sapo</span>
         </a>
         <nav class="nav" aria-label="Main navigation">
-          {navigation.map((item) => {
-            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          {t.nav.map((item) => {
+            const base = item.href.split('#')[0];
+            const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);
             return (
               <a
                 href={item.href}
@@ -90,8 +100,9 @@ const jsonLd = {
               </a>
             );
           })}
+          <a href={switchHref} class="nav-link lang-switch" title={t.alt.title}>{t.alt.label}</a>
         </nav>
-        <MobileNav currentPath={currentPath} />
+        <MobileNav currentPath={currentPath} lang={lang} />
       </div>
     </header>
     <main>
@@ -99,11 +110,13 @@ const jsonLd = {
     </main>
     <footer class="footer">
       <div class="container footer-inner">
-        <span>© {new Date().getFullYear()} Max Sapo</span>
+        <span>© {new Date().getFullYear()} Max Sapo · {t.footer.tagline}</span>
         <div class="footer-links">
-          <a href="/rss.xml" class="footer-link">RSS</a>
+          <a href={site.social.instagram} class="footer-link" target="_blank" rel="noopener noreferrer">@delamax</a>
           <span>·</span>
-          <span>AI infrastructure · interfaces · product leadership</span>
+          <a href={site.social.linkedin} class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span>·</span>
+          <a href={site.social.youtube} class="footer-link" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
       </div>
     </footer>

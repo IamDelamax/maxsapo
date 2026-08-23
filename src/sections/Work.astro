@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getContent, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getContent(lang);
+---
+<BaseLayout lang={lang} title={`${t.work.title} — Max Sapo`} description={t.work.lede}>
+  <PageHeader eyebrow={t.work.eyebrow} title={t.work.title} lede={t.work.lede} />
+
+  <section class="container section">
+    <h2 class="block-title">{t.work.experienceTitle}</h2>
+    <div class="timeline">
+      {t.work.experience.map((job) => (
+        <article class="timeline-item">
+          <div class="timeline-meta">
+            <span class="timeline-period">{job.period}</span>
+          </div>
+          <div class="timeline-body">
+            <h3>
+              {job.href ? <a href={job.href} target="_blank" rel="noopener noreferrer">{job.org}</a> : job.org}
+              <span class="timeline-role">{job.role}</span>
+            </h3>
+            <p>{job.body}</p>
+            {job.bullets.length > 0 && (
+              <ul>
+                {job.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="grid two">
+      <div>
+        <h2 class="block-title">{t.work.educationTitle}</h2>
+        <div class="edu-list">
+          {t.work.education.map((e) => (
+            <div class="edu-item">
+              <span class="edu-org">{e.org}</span>
+              <span class="edu-role">{e.role}</span>
+              <span class="edu-period">{e.period}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 class="block-title">{t.work.angelTitle}</h2>
+        <ul class="angel-list">
+          {t.work.angel.map((a) => (
+            <li>
+              {a.href ? <a href={a.href} target="_blank" rel="noopener noreferrer">{a.name}</a> : a.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
