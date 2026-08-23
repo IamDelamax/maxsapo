@@ -23,6 +23,5 @@ rendered once per language (`/` and `/ru/`).
 
 ## TODO for Max
 
-- Drop a real portrait at `public/img/portrait.jpg` and change `portrait.svg` → `portrait.jpg` in `src/sections/Home.astro`.
 - Confirm the public email in `src/data/site.ts` (currently `max@happyverse.ai`).
-- Save the Sergey Brin photo as `public/img/brin.jpg` (cropped, no black bars) — the home page picks it up automatically on next build.
+- Hero photo is `public/img/hero.jpg` (cropped from IMG_5944). Swap the file to change it.

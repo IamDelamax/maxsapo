@@ -11,10 +11,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = getContent(lang);
 const heroVideo = videos.find((v) => v.id === 'agi-summit')!;
-// Optional proof photo: drops in automatically once public/img/brin.jpg exists.
-import fs from 'node:fs';
-const hasBrinPhoto = fs.existsSync(new URL('../../public/img/brin.jpg', import.meta.url));
-const brinCaption = lang === 'ru' ? 'С Сергеем Брином. Сан-Франциско, 2026.' : 'With Sergey Brin. San Francisco, 2026.';
 const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
 ---
 <BaseLayout lang={lang}>
@@ -33,7 +29,7 @@ const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
       </div>
     </div>
     <figure class="hero-portrait">
-      <img src="/img/portrait.svg" alt={t.hero.portraitAlt} width="560" height="700" loading="eager" />
+      <img src="/img/hero.jpg" alt={t.hero.portraitAlt} width="1179" height="1160" loading="eager" />
       <figcaption>{t.hero.portraitCaption} · <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">@delamax</a></figcaption>
     </figure>
   </section>
@@ -47,14 +43,6 @@ const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
     ))}
   </section>
 
-  {hasBrinPhoto && (
-    <section class="container proof-photo-band">
-      <figure class="proof-photo">
-        <img src="/img/brin.jpg" alt={brinCaption} loading="lazy" />
-        <figcaption>{brinCaption}</figcaption>
-      </figure>
-    </section>
-  )}
 
   <section class="container section" id="life">
     <div class="section-header">

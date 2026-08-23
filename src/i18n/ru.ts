@@ -32,8 +32,8 @@ export const ru: Content = {
       { label: 'Пруфы', href: '/ru/work', primary: false },
       { label: 'Питчни мне идею', href: `mailto:${site.email}`, primary: false },
     ],
-    portraitAlt: 'Макс Сапо',
-    portraitCaption: 'Сан-Франциско, Калифорния',
+    portraitAlt: 'Макс Сапо и Сергей Брин',
+    portraitCaption: 'С Сергеем Брином · Сан-Франциско',
   },
 
   stats: [

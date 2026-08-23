@@ -31,8 +31,8 @@ export const en = {
       { label: 'The receipts', href: '/work', primary: false },
       { label: 'Pitch me an idea', href: `mailto:${site.email}`, primary: false },
     ],
-    portraitAlt: 'Max Sapo',
-    portraitCaption: 'San Francisco, CA',
+    portraitAlt: 'Max Sapo with Sergey Brin',
+    portraitCaption: 'With Sergey Brin · San Francisco',
   },
 
   stats: [
