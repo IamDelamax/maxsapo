@@ -14,12 +14,27 @@ const posts = (await getCollection('writing'))
     lede="Short essays and working notes. Some polished, some deliberately alive."
   />
   <section class="container grid two">
-    {posts.map((post) => (
-      <a class="card" href={`/writing/${post.id.replace(/\.(md|mdx)$/, '')}`}>
-        <div class="card-meta">{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
-        <h3>{post.data.title}</h3>
-        <p>{post.data.description}</p>
-      </a>
-    ))}
+    {posts.map((post) => {
+      const words = post.body ? post.body.trim().split(/\s+/).length : 0;
+      const readingTime = Math.max(1, Math.ceil(words / 200));
+      return (
+        <a class="card writing-card" href={`/writing/${post.id.replace(/\.(md|mdx)$/, '')}`}>
+          <div class="card-meta">
+            <span>{post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+            <span class="dot">·</span>
+            <span>{readingTime} min read</span>
+          </div>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="card-tags">
+              {post.data.tags.map((t: string) => (
+                <span class="tag">#{t}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      );
+    })}
   </section>
 </BaseLayout>
