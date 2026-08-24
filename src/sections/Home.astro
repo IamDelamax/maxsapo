@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import PillarIcon from '../components/PillarIcon.astro';
 import { getContent, type Lang } from '../i18n';
 import { site } from '../data/site';
 import { videos } from '../data/videos';
@@ -54,18 +55,16 @@ const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
     </div>
     <div class="pillar-grid">
       {t.pillars.items.map((p, i) => (
-        <article class={`pillar pillar-${p.key}`} id={p.key}>
+        <a class={`pillar pillar-${p.key}`} id={p.key} href={p.href}>
           <div class="pillar-head">
+            <span class="pillar-glyph"><PillarIcon name={p.key} /></span>
             <span class="pillar-num">0{i + 1}</span>
             <span class="pillar-label">{p.label}</span>
           </div>
           <h3>{p.title}</h3>
-          <p>{p.body}</p>
-          <ul class="pillar-proof">
-            {p.proof.map((line) => <li>{line}</li>)}
-          </ul>
-          <a class="pillar-link" href={p.link.href}>{p.link.label} →</a>
-        </article>
+          <p>{p.tagline}</p>
+          <span class="pillar-link">{t.pillars.enter} →</span>
+        </a>
       ))}
     </div>
   </section>

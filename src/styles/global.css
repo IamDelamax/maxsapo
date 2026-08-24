@@ -154,15 +154,19 @@ img { max-width: 100%; display: block; }
   position: fixed;
   inset: 0;
   z-index: 100;
-  display: flex;
+  /* display:none keeps the closed drawer out of the render tree entirely —
+     a hidden fixed overlay with backdrop-filter makes Chrome paint the
+     scrolled page black. */
+  display: none;
   justify-content: flex-end;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.25s ease, opacity 0.25s ease;
+  opacity: 1;
+  transition: opacity 0.25s ease;
 }
 .mobile-menu.is-open {
-  visibility: visible;
-  opacity: 1;
+  display: flex;
+  @starting-style {
+    opacity: 0;
+  }
 }
 .mobile-menu-backdrop {
   position: absolute;
@@ -409,15 +413,56 @@ h3 { font-size: 1.28rem; margin-bottom: 8px; }
   gap: 12px;
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
-.pillar:hover { transform: translateY(-2px); background: var(--panel-strong); border-color: rgba(244, 180, 95, 0.42); }
-.pillar-head { display: flex; align-items: baseline; gap: 12px; }
+.pillar:hover { transform: translateY(-2px); background: var(--panel-strong); border-color: var(--qcolor, rgba(244, 180, 95, 0.42)); }
+.pillar-head { display: flex; align-items: center; gap: 12px; }
 .pillar-num { color: var(--subtle); font-weight: 700; font-size: 0.9rem; }
-.pillar-label { color: var(--accent); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 800; font-size: 0.85rem; }
-.pillar h3 { margin: 0; font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1.25; }
+.pillar-label { color: var(--qcolor, var(--accent)); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 800; font-size: 0.85rem; }
+.pillar h3 { margin: 0; font-size: 1.35rem; letter-spacing: -0.02em; line-height: 1.25; color: var(--text); }
 .pillar p { margin: 0; color: var(--muted); }
-.pillar-proof { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-.pillar-proof li { border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 999px; padding: 6px 11px; color: var(--muted); font-size: 0.83rem; }
-.pillar-link { margin-top: auto; padding-top: 8px; color: var(--accent); font-weight: 650; }
+.pillar-link { margin-top: auto; padding-top: 8px; color: var(--qcolor, var(--accent)); font-weight: 650; }
+
+/* quadrant hues */
+.pillar-love, .q-love { --qcolor: #f28ba8; --qsoft: rgba(242, 139, 168, 0.12); }
+.pillar-health, .q-health { --qcolor: #7ddba3; --qsoft: rgba(125, 219, 163, 0.12); }
+.pillar-work, .q-work { --qcolor: #f4b45f; --qsoft: rgba(244, 180, 95, 0.12); }
+.pillar-wealth, .q-wealth { --qcolor: #7dd3fc; --qsoft: rgba(125, 211, 252, 0.12); }
+
+.pillar-glyph, .quadrant-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  color: var(--qcolor, var(--accent));
+  background: var(--qsoft, rgba(244, 180, 95, 0.1));
+  border: 1px solid var(--qcolor, var(--line));
+  flex: none;
+}
+.pillar-icon { display: block; }
+
+/* ---------- quadrant pages ---------- */
+.quadrant-hero { padding: 28px 0 10px; max-width: 860px; }
+.quadrant-hero .back-link { display: inline-block; margin-bottom: 26px; color: var(--muted); font-size: 0.9rem; }
+.quadrant-hero .back-link:hover { color: var(--qcolor, var(--accent)); }
+.quadrant-head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.quadrant-head .eyebrow { margin: 0; color: var(--qcolor, var(--accent)); }
+.quadrant-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); max-width: 16ch; }
+.quadrant-hero .lede { max-width: 640px; }
+.q-love .eyebrow, .q-health .eyebrow, .q-wealth .eyebrow { color: var(--qcolor); }
+
+.dial-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.dial-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  padding: 24px;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.dial-card:hover { background: var(--panel-strong); border-color: var(--qcolor, rgba(244, 180, 95, 0.42)); }
+.dial-num { color: var(--qcolor, var(--accent)); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.12em; }
+.dial-card h3 { margin: 8px 0 0; font-size: 1.15rem; }
+.dial-card p { margin: 8px 0 0; color: var(--muted); }
 
 /* ---------- delamax band ---------- */
 .delamax-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -513,7 +558,7 @@ body.nav-locked { overflow: hidden; }
   .hero { grid-template-columns: 1fr; padding: 44px 0 24px; gap: 32px; }
   .hero-portrait { max-width: 420px; }
   .stats-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pillar-grid, .video-grid, .now-list { grid-template-columns: 1fr; }
+  .pillar-grid, .video-grid, .now-list, .dial-grid { grid-template-columns: 1fr; }
   .delamax-inner, .video-feature { grid-template-columns: 1fr; }
   .grid.two, .grid.three { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 6px; }

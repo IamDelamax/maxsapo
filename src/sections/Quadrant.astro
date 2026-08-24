@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PillarIcon from '../components/PillarIcon.astro';
+import { getContent, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  quadrant: 'love' | 'health' | 'wealth';
+}
+const { lang, quadrant } = Astro.props;
+const t = getContent(lang);
+const q = t.quadrants[quadrant];
+---
+<BaseLayout lang={lang} title={`${q.label} — Max Sapo`} description={q.lede}>
+  <section class={`container quadrant-hero q-${quadrant}`}>
+    <a class="back-link" href={q.back.href}>{q.back.label}</a>
+    <div class="quadrant-head">
+      <span class="quadrant-glyph"><PillarIcon name={quadrant} size={34} /></span>
+      <p class="eyebrow">{q.eyebrow}</p>
+    </div>
+    <h1>{q.title}</h1>
+    <p class="lede">{q.lede}</p>
+  </section>
+
+  <section class={`container section q-${quadrant}`}>
+    <div class="section-header">
+      <div>
+        <h2>{q.dialsTitle}</h2>
+      </div>
+    </div>
+    <div class="dial-grid">
+      {q.dials.map((d, i) => (
+        <article class="dial-card">
+          <span class="dial-num">0{i + 1}</span>
+          <h3>{d.name}</h3>
+          <p>{d.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class={`container section q-${quadrant}`}>
+    <div class="section-header">
+      <div>
+        <h2>{q.doingTitle}</h2>
+      </div>
+    </div>
+    <div class="grid two">
+      {q.doing.map((item) => (
+        <article class="card">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+          {item.href && item.linkLabel && (
+            <a
+              class="pillar-link"
+              href={item.href}
+              {...item.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+            >
+              {item.linkLabel} →
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

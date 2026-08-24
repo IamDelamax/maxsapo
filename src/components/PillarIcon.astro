@@ -1,0 +1,34 @@
+---
+export type PillarKey = 'love' | 'health' | 'work' | 'wealth';
+
+interface Props {
+  name: PillarKey;
+  size?: number;
+}
+
+const { name, size = 26 } = Astro.props;
+---
+{name === 'love' && (
+  <svg class="pillar-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 20.5S3.5 15.6 3.5 9.7C3.5 6.9 5.6 4.8 8.1 4.8c1.6 0 3 .8 3.9 2.1.9-1.3 2.3-2.1 3.9-2.1 2.5 0 4.6 2.1 4.6 4.9 0 5.9-8.5 10.8-8.5 10.8z" />
+  </svg>
+)}
+{name === 'health' && (
+  <svg class="pillar-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9.2" />
+    <polyline points="5.5,12.5 9,12.5 10.7,8 13.3,16 15,12.5 18.5,12.5" />
+  </svg>
+)}
+{name === 'work' && (
+  <svg class="pillar-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="6.5" y="6.5" width="11" height="11" rx="2" />
+    <rect x="10" y="10" width="4" height="4" rx="1" />
+    <path d="M9 6.5V3.5M15 6.5V3.5M9 20.5v-3M15 20.5v-3M6.5 9h-3M6.5 15h-3M20.5 9h-3M20.5 15h-3" />
+  </svg>
+)}
+{name === 'wealth' && (
+  <svg class="pillar-icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="3.5,17.5 9,12 12.5,15 20.5,6.5" />
+    <polyline points="14.5,6.5 20.5,6.5 20.5,12.5" />
+  </svg>
+)}

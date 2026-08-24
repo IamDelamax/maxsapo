@@ -25,7 +25,7 @@ export const en = {
     title: 'I spent four years making Google’s TPUs sell.',
     titleAccent: 'Then I left to build the face on top of them — and in May 2026 I came back to the silicon.',
     lede:
-      'Senior Product Manager on Google Cloud TPU. Founder of Happyverse.AI, where we built real-time video agents on a pre-seed from Village Global and Jeff Dean. In between: a transformer chip at Etched, a $355M IPO at Sistema, a CFA charter, and thirty-odd rap tracks as Delamax. I do not keep those lives in separate folders.',
+      'Senior PM on Google Cloud TPU. Founder of Happyverse.AI. Before that: a transformer chip at Etched, a $355M IPO, a CFA charter, and thirty-odd rap tracks as Delamax.',
     ctas: [
       { label: 'Watch me talk', href: '/watch', primary: true },
       { label: 'The receipts', href: '/work', primary: false },
@@ -46,45 +46,136 @@ export const en = {
     eyebrow: 'The whole picture',
     title: 'Four dials, not one.',
     lede:
-      'At Happyverse I built HIPERFLOW — nine dials that decide how a life actually feels: health, intelligence, productivity, emotions, relationships, freedom, love, employment, wealth. Four of them do most of the work. I run my own life on them, so this site is organised the same way.',
+      'I run my life on four dials — love, health, work, wealth. Each one has its own room here.',
     items: [
       {
         key: 'love',
         label: 'Love',
         title: 'Ambition is easier in pairs.',
-        body:
-          'I run Power Couple Club — a private club in San Francisco and Los Angeles for people who refuse to choose between a career and a life. Curated dinners, real introductions, none of the networking-event energy. The premise is simple: the person next to you compounds faster than any portfolio.',
-        proof: ['Power Couple Club — SF & LA', 'Curated dinners, vetted membership'],
-        link: { label: 'powercoupleclub.com', href: site.ventures.powercouple },
+        tagline: 'Romance, family, friends, and Power Couple Club.',
+        href: '/love',
       },
       {
         key: 'health',
         label: 'Health',
         title: 'You cannot out-think a body you are wrecking.',
-        body:
-          'finetuned.me is a four-day reset on a private 40-acre desert estate in California — sixteen people, October 1–5, 2026. Move, eat, talk, sleep, leave different. It grew out of MLHappy.org, the non-profit I started to put AI behind well-being instead of engagement metrics.',
-        proof: ['finetuned.me — Oct 1–5, 2026', '16 people, 40 acres, no phones on the agenda'],
-        link: { label: 'finetuned.me', href: site.ventures.finetuned },
+        tagline: 'Body, emotions, attention — and finetuned.me.',
+        href: '/health',
       },
       {
         key: 'work',
         label: 'Work',
         title: 'The silicon, the face on top, and back to the silicon.',
-        body:
-          'Google Cloud TPU: v4 Pods, v5e, v5p, Trillium — I ran growth and strategy for the machines that trained the models everyone now argues about, and I am back on them today. Etched: a one-month sprint with 30+ engineers to get Sohu, a transformer-only inference chip, through tapeout. Happyverse: the layer on top — AI that holds a real-time conversation with your face and your judgment. Very few people have stood at all three altitudes.',
-        proof: ['Google Cloud TPU — Senior PM', 'Founder, Happyverse.AI · ex-Etched'],
-        link: { label: 'The full record', href: '/work' },
+        tagline: 'Google TPU, Etched, Happyverse. The full record.',
+        href: '/work',
       },
       {
         key: 'wealth',
         label: 'Wealth',
         title: 'I did finance properly before I did tech.',
-        body:
-          'CFA charterholder. Six years at Sistema as Investment Director, where I led the $355M IPO of Detsky Mir and a turnaround that grew equity value about fivefold. Investment banking at VTB Capital and ING before that. Now I write angel cheques: Alma, Electric Fish, CloudThread (YC ’22), BitRiver, GSB 2020 Fund.',
-        proof: ['CFA charterholder', 'Angel investor since 2017'],
-        link: { label: 'The full record', href: '/work' },
+        tagline: 'CFA, a $355M IPO, angel cheques — and legacy.',
+        href: '/wealth',
       },
     ],
+    enter: 'Enter',
+  },
+
+  quadrants: {
+    love: {
+      label: 'Love',
+      eyebrow: 'Dial 01 · Love',
+      title: 'Ambition is easier in pairs.',
+      lede:
+        'Relationships sit at the center of the whole system — we are social animals, and no career compounds faster than the person next to you.',
+      dialsTitle: 'The dials I watch',
+      dials: [
+        { name: 'Romance', desc: 'Mutual love and real quality time with your partner — not just logistics.' },
+        { name: 'Family', desc: 'Presence with kids, parents, siblings. Being in the room, not just near it.' },
+        { name: 'Friends & communities', desc: 'The people who knew you before the job title, and the rooms where you belong.' },
+        { name: 'Passions', desc: 'Things you do purely because you love them — for joy, not for the feed.' },
+      ],
+      doingTitle: 'What I actually do about it',
+      doing: [
+        {
+          title: 'Power Couple Club',
+          body:
+            'A private club in San Francisco and Los Angeles for people who refuse to choose between a career and a life. Curated dinners, real introductions, none of the networking-event energy.',
+          href: site.ventures.powercouple,
+          linkLabel: 'powercoupleclub.com',
+        },
+        {
+          title: 'The passions I do not outsource',
+          body:
+            'Guitar, writing, and thirty-odd rap tracks as Delamax since 2003. The family rule is simpler and harder: quality time, phone elsewhere.',
+          href: '/watch#music',
+          linkLabel: 'Hear the music',
+        },
+      ],
+      back: { label: '← All four dials', href: '/#life' },
+    },
+    health: {
+      label: 'Health',
+      eyebrow: 'Dial 02 · Health',
+      title: 'You cannot out-think a body you are wrecking.',
+      lede:
+        'Health is the platform everything else runs on — the body, the emotions, and the attention you refuse to surrender to a feed.',
+      dialsTitle: 'The dials I watch',
+      dials: [
+        { name: 'Fitness', desc: 'A routine that actually repeats. Consistency beats intensity.' },
+        { name: 'Nutrition & recharging', desc: 'Food quality, sleep, and rest — the unglamorous compounding.' },
+        { name: 'Emotions', desc: 'Enthusiasm, empathy, and managing the SUFFER list: stress, uncertainty, fears, failures, evil, regrets.' },
+        { name: 'Freedom', desc: 'Agency over your own attention. The dial most people quietly lose to their phone.' },
+      ],
+      doingTitle: 'What I actually do about it',
+      doing: [
+        {
+          title: 'finetuned.me',
+          body:
+            'A four-day reset on a private 40-acre desert estate in California — sixteen people, October 1–5, 2026. Move, eat, talk, sleep, leave different.',
+          href: site.ventures.finetuned,
+          linkLabel: 'finetuned.me',
+        },
+        {
+          title: 'MLHappy.org',
+          body:
+            'The non-profit I started to put AI behind well-being instead of engagement metrics. It is where finetuned.me and the HIPERFLOW framework came from.',
+          href: '',
+          linkLabel: '',
+        },
+      ],
+      back: { label: '← All four dials', href: '/#life' },
+    },
+    wealth: {
+      label: 'Wealth',
+      eyebrow: 'Dial 04 · Wealth',
+      title: 'I did finance properly before I did tech.',
+      lede:
+        'Money matters, but wealth is bigger than money — it is earnings, what the money actually buys, and the legacy that outlives the accounts.',
+      dialsTitle: 'The dials I watch',
+      dials: [
+        { name: 'Earnings', desc: 'Income from work, side projects, and investments — several engines, not one.' },
+        { name: 'Spending', desc: 'What the money buys. Mostly it should buy time.' },
+        { name: 'Character & legacy', desc: 'What remains when the accounts settle — something to be proud of and remembered by.' },
+      ],
+      doingTitle: 'What I actually do about it',
+      doing: [
+        {
+          title: 'The finance years',
+          body:
+            'CFA charterholder. Six years at Sistema as Investment Director: the $355M IPO of Detsky Mir and a turnaround that grew equity value about fivefold. VTB Capital and ING before that.',
+          href: '/work',
+          linkLabel: 'The full record',
+        },
+        {
+          title: 'Angel cheques',
+          body:
+            'Investing since 2017: Alma, Electric Fish, CloudThread (YC ’22), BitRiver, and the GSB 2020 Fund.',
+          href: '/work',
+          linkLabel: 'The portfolio',
+        },
+      ],
+      back: { label: '← All four dials', href: '/#life' },
+    },
   },
 
   delamax: {
