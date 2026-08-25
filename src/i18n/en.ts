@@ -6,8 +6,19 @@ export const en = {
   alt: { code: 'ru', label: 'RU', title: 'Читать по-русски' },
   prefix: '',
 
+  navHappiness: {
+    label: 'Happiness',
+    items: [
+      { key: 'life', label: 'All four dials', href: '/#life' },
+      { key: 'love', label: 'Love', href: '/love' },
+      { key: 'health', label: 'Health', href: '/health' },
+      { key: 'work', label: 'Work', href: '/work' },
+      { key: 'wealth', label: 'Wealth', href: '/wealth' },
+      { key: 'check', label: 'The 60-second check', href: '/#check' },
+    ],
+  },
+
   nav: [
-    { label: 'Life', href: '/#life' },
     { label: 'Watch', href: '/#watch' },
     { label: 'Writing', href: '/#writing' },
     { label: 'Now', href: '/#now' },

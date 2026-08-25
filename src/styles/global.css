@@ -902,3 +902,82 @@ body.nav-locked { overflow: hidden; }
 }
 .coaching-faq details[open] summary::after { transform: rotate(45deg); }
 .coaching-faq details p { margin: 8px 0 0; color: var(--muted); }
+
+/* ---------- happiness dropdown ---------- */
+.nav-drop { position: relative; }
+.nav-drop-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.nav-drop .caret { transition: transform 160ms ease; margin-top: 1px; }
+.nav-drop:hover .caret, .nav-drop:focus-within .caret { transform: rotate(180deg); }
+.nav-drop-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  min-width: 232px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 22px 54px rgba(120, 80, 30, 0.2);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms;
+  z-index: 30;
+}
+.nav-drop-menu::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.nav-drop-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.nav-drop-item:hover { background: var(--panel-strong); color: var(--qcolor, var(--accent)); }
+.nav-drop-icon { display: inline-flex; color: var(--qcolor, var(--accent)); flex: none; }
+.nav-drop-plain { color: var(--muted); }
+.nav-drop-item[data-key='check'] { border-top: 1px solid var(--line); border-radius: 0 0 10px 10px; margin-top: 4px; }
+
+/* mobile happiness group */
+.mobile-group-label {
+  color: var(--subtle);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  margin: 0 0 2px;
+}
+.mobile-sub-links { display: flex; flex-direction: column; }
+.mobile-nav-link.mobile-sub { font-size: 1.05rem; padding: 8px 0 8px 12px; }
+.mobile-nav-link.mobile-sub.pillar-love { color: var(--qcolor); }
+.mobile-nav-link.mobile-sub.pillar-health { color: var(--qcolor); }
+.mobile-nav-link.mobile-sub.pillar-work { color: var(--qcolor); }
+.mobile-nav-link.mobile-sub.pillar-wealth { color: var(--qcolor); }

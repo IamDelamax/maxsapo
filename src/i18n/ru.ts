@@ -7,8 +7,19 @@ export const ru: Content = {
   alt: { code: 'en', label: 'EN', title: 'Read in English' },
   prefix: '/ru',
 
+  navHappiness: {
+    label: 'Счастье',
+    items: [
+      { key: 'life', label: 'Все четыре тумблера', href: '/ru/#life' },
+      { key: 'love', label: 'Любовь', href: '/ru/love' },
+      { key: 'health', label: 'Здоровье', href: '/ru/health' },
+      { key: 'work', label: 'Работа', href: '/ru/work' },
+      { key: 'wealth', label: 'Деньги', href: '/ru/wealth' },
+      { key: 'check', label: 'Чек за 60 секунд', href: '/ru/#check' },
+    ],
+  },
+
   nav: [
-    { label: 'Жизнь', href: '/ru/#life' },
     { label: 'Видео', href: '/ru/#watch' },
     { label: 'Тексты', href: '/ru/#writing' },
     { label: 'Сейчас', href: '/ru/#now' },

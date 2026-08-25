@@ -29,6 +29,17 @@ const switchHref = altHref(lang, currentPath);
     </div>
 
     <nav class="mobile-nav-links" aria-label="Mobile navigation">
+      <p class="mobile-group-label">{t.navHappiness.label}</p>
+      <div class="mobile-sub-links">
+        {t.navHappiness.items.map((item) => (
+          <a
+            href={item.href}
+            class={`mobile-nav-link mobile-sub ${['love', 'health', 'work', 'wealth'].includes(item.key) ? `pillar-${item.key}` : ''}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
       {t.nav.map((item) => {
         const base = item.href.split('#')[0];
         const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);

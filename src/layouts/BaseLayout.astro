@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site } from '../data/site';
 import { getContent, altHref, type Lang } from '../i18n';
 import MobileNav from '../components/MobileNav.astro';
+import PillarIcon from '../components/PillarIcon.astro';
 import SocialIcons from '../components/SocialIcons.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import { ClientRouter } from 'astro:transitions';
@@ -113,6 +114,26 @@ const jsonLd = {
           <span class="logo-name">Max Sapo</span>
         </a>
         <nav class="nav" aria-label="Main navigation">
+          <div class="nav-drop">
+            <button class="nav-link nav-drop-trigger" type="button" aria-haspopup="true">
+              {t.navHappiness.label}
+              <svg class="caret" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" /></svg>
+            </button>
+            <div class="nav-drop-menu">
+              {t.navHappiness.items.map((item) => (
+                <a
+                  href={item.href}
+                  class={`nav-drop-item ${['love', 'health', 'work', 'wealth'].includes(item.key) ? `pillar-${item.key}` : 'nav-drop-plain'}`}
+                  data-key={item.key}
+                >
+                  {['love', 'health', 'work', 'wealth'].includes(item.key) && (
+                    <span class="nav-drop-icon"><PillarIcon name={item.key as any} size={16} /></span>
+                  )}
+                  <span>{item.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
           {t.nav.map((item) => {
             const base = item.href.split('#')[0];
             const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);
