@@ -43,7 +43,7 @@ export const ru: Content = {
       linkHref: '/ru/#delamax',
       post: '. В итоге поступил в Стэнфорд. Выводы делайте сами.',
     },
-    credibility: ['Google', 'Stanford GSB', 'Чартер CFA', 'Etched', 'Georgia Tech MSc', 'Happyverse — pre-seed от Village Global и Джеффа Дина'],
+    credibility: ['Google', 'Stanford GSB', 'Чартер CFA', 'Etched', 'Happyverse — pre-seed от Village Global и Джеффа Дина'],
     ctas: [
       { label: 'Смотреть видео', href: '/ru/#watch', primary: true },
       { label: 'Пруф, что я работаю', href: '/ru/work', primary: false },
@@ -479,8 +479,8 @@ export const ru: Content = {
     education: [
       {
         org: 'Georgia Tech',
-        role: 'MSc, Computer Science — машинное обучение и человеко-компьютерное взаимодействие',
-        period: '2024 — сейчас',
+        role: 'Курсы MSc, Computer Science — ML и HCI. Бросил; знания оставил себе.',
+        period: '2024 — 2026',
       },
       {
         org: 'Stanford GSB · Doerr School of Sustainability',
@@ -532,10 +532,6 @@ export const ru: Content = {
       {
         title: 'Растим Power Couple Club',
         body: 'Сан-Франциско и Лос-Анджелес. Ужины, знакомства и планка членства, которая не опускается.',
-      },
-      {
-        title: 'Дописываю MSc в Georgia Tech',
-        body: 'Машинное обучение и HCI, part-time, онлайн, по ночам.',
       },
       {
         title: 'Снова записываюсь',

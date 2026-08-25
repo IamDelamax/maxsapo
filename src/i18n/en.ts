@@ -42,7 +42,7 @@ export const en = {
       linkHref: '/#delamax',
       post: '. I ended up at Stanford. Draw your own conclusions.',
     },
-    credibility: ['Google', 'Stanford GSB', 'CFA charterholder', 'Etched', 'Georgia Tech MSc', 'Happyverse — backed by Village Global & Jeff Dean'],
+    credibility: ['Google', 'Stanford GSB', 'CFA charterholder', 'Etched', 'Happyverse — backed by Village Global & Jeff Dean'],
     ctas: [
       { label: 'Watch me talk', href: '/#watch', primary: true },
       { label: 'Proof I actually work', href: '/work', primary: false },
@@ -478,8 +478,8 @@ export const en = {
     education: [
       {
         org: 'Georgia Tech',
-        role: 'MSc, Computer Science — Machine Learning & Human-Computer Interaction',
-        period: '2024 — present',
+        role: 'MSc coursework, Computer Science — ML & HCI. Dropped out; kept the knowledge.',
+        period: '2024 — 2026',
       },
       {
         org: 'Stanford GSB · Doerr School of Sustainability',
@@ -531,10 +531,6 @@ export const en = {
       {
         title: 'Growing Power Couple Club',
         body: 'San Francisco and Los Angeles. Dinners, introductions, and a membership bar that stays high.',
-      },
-      {
-        title: 'Finishing the Georgia Tech MSc',
-        body: 'Machine learning and human-computer interaction, part-time, online, at night.',
       },
       {
         title: 'Recording again',
