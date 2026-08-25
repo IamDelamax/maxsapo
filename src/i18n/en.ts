@@ -155,7 +155,7 @@ export const en = {
         {
           title: 'Coaching, if you want backup',
           body:
-            'A dial stuck below 3 for months is rarely an information problem — it is a system problem. Mapping the system is exactly what my free first call is for.',
+            'A dial stuck below 40% for months is rarely an information problem — it is a system problem. Mapping the system is exactly what my free first call is for.',
           href: '/#coaching',
           linkLabel: 'Book a free call',
         },
@@ -240,7 +240,7 @@ export const en = {
       'Everything on this site — the frameworks, the career, the music — feeds one practice: helping ambitious people build a life that actually feels good. The first conversation is free.',
     points: [
       'A free 45-minute call: we map your love, health, work, and wealth dials and find the loudest one.',
-      'Built on HIPERFLOW, the nine-element system I designed at Happyverse — not vibes, a framework.',
+      'Built on the Four Dials — love, health, work, wealth. Simple enough to remember on a bad day. That is the point.',
       'No slide decks, no upsell script. If I can help, I say how. If I can’t, I say who can.',
     ],
     cta: {
@@ -252,7 +252,7 @@ export const en = {
     whyTitle: 'Why me — receipts, not vibes',
     why: [
       'Two promotions and 70+ peer bonuses at Google, including from Chief AI Scientist Jeff Dean.',
-      'HIPERFLOW is the framework behind Happyverse Confidants — the company I founded, pre-seed backed by Village Global and Jeff Dean.',
+      'The Four Dials distill years of happiness-framework work at Happyverse — the company I founded, pre-seed backed by Village Global and Jeff Dean.',
       'CFA charterholder. I treat a life like a portfolio: diversified, rebalanced, reviewed on a schedule.',
     ],
     faqTitle: 'The questions a skeptic asks',
@@ -267,7 +267,7 @@ export const en = {
       },
       {
         q: 'Why does a Google PM coach people at all?',
-        a: 'Because I built HIPERFLOW for a product and realized I use it on my own life more than the product ever did. Coaching is where the framework meets a real life — mine included.',
+        a: 'Because I spent years building happiness frameworks at an AI company — and noticed that the only version that survives daily life is a simple one: love, health, work, wealth. Coaching is where those four dials meet a real life. Mine included.',
       },
     ],
   },
