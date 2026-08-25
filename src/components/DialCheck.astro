@@ -33,11 +33,16 @@ const config = {
               <span class="dial-check-name">{dial.name}</span>
               <span class="dial-check-verdict" data-verdict></span>
             </div>
-            <div class="dial-dots" role="radiogroup" aria-label={dial.name}>
-              {[1, 2, 3, 4, 5].map((v) => (
-                <button type="button" class="dial-dot" data-val={v} aria-label={`${dial.name}: ${v}/5`}>{v}</button>
-              ))}
-            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="60"
+              data-score
+              class="dial-slider"
+              aria-label={dial.name}
+            />
           </div>
         ))}
       </div>
@@ -48,7 +53,7 @@ const config = {
           <circle cx="50" cy="50" r="40" class="ring-track" />
           <circle cx="50" cy="50" r="40" class="ring-fill" data-ring transform="rotate(-90 50 50)" />
         </svg>
-        <div class="dial-ring-value"><span data-avg>–</span><small>/5</small></div>
+        <div class="dial-ring-value"><span data-avg>–</span><small>%</small></div>
       </div>
       <p class="dial-check-score-label">{d.scoreLabel}</p>
       <p class="dial-check-overall" data-overall></p>
@@ -76,49 +81,45 @@ const config = {
     try {
       scores = JSON.parse(localStorage.getItem(config.storage) || '{}');
     } catch {}
+    // migrate old 1–5 scores to percent
+    for (const k of Object.keys(scores)) if (scores[k] <= 5) scores[k] = scores[k] * 20;
 
-    const verdict = (v: number) =>
-      v <= 2 ? config.verdicts.pain : v <= 4 ? config.verdicts.growth : config.verdicts.great;
+    const tone = (v: number) =>
+      v < 20 ? 'emergency' : v < 40 ? 'pain' : v < 60 ? 'growth' : v < 80 ? 'ok' : 'excellent';
+    const verdict = (v: number) => config.verdicts[tone(v)];
 
     function render() {
-      const values: number[] = [];
+      let sum = 0;
       rows.forEach((row, i) => {
-        const v = scores[i];
-        const dots = row.querySelectorAll<HTMLButtonElement>('.dial-dot');
-        dots.forEach((dot) => {
-          dot.classList.toggle('active', v != null && Number(dot.dataset.val) <= v);
-        });
+        const v = scores[i] ?? 60;
+        sum += v;
+        const input = row.querySelector<HTMLInputElement>('[data-score]')!;
+        if (Number(input.value) !== v) input.value = String(v);
         const verdictEl = row.querySelector<HTMLElement>('[data-verdict]')!;
-        verdictEl.textContent = v != null ? verdict(v) : '';
-        verdictEl.dataset.tone = v == null ? '' : v <= 2 ? 'pain' : v <= 4 ? 'growth' : 'great';
-        if (v != null) values.push(v);
+        verdictEl.textContent = `${v}% · ${verdict(v)}`;
+        verdictEl.dataset.tone = tone(v);
       });
 
-      if (values.length === rows.length) {
-        const avg = values.reduce((a, b) => a + b, 0) / values.length;
-        avgEl.textContent = (Math.round(avg * 10) / 10).toString();
-        ringEl.style.strokeDasharray = `${(avg / 5) * CIRC} ${CIRC}`;
-        overallEl.textContent = verdict(Math.round(avg));
-        const summary = config.dials.map((name: string, i: number) => `${name} ${scores[i]}/5`).join(', ');
-        ctaEl.href = `mailto:${config.email}?subject=${encodeURIComponent(
-          `${config.mailPrefix} — ${config.label} ${(Math.round(avg * 10) / 10)}/5 (${summary})`,
-        )}`;
-      } else {
-        avgEl.textContent = '–';
-        ringEl.style.strokeDasharray = `0 ${CIRC}`;
-        overallEl.textContent = '';
-      }
+      const avg = Math.round(sum / rows.length);
+      avgEl.textContent = String(avg);
+      ringEl.style.strokeDasharray = `${(avg / 100) * CIRC} ${CIRC}`;
+      const overallTone = tone(avg);
+      overallEl.textContent = verdict(avg);
+      overallEl.dataset.tone = overallTone;
+      const summary = config.dials.map((name: string, i: number) => `${name} ${scores[i] ?? 60}%`).join(', ');
+      ctaEl.href = `mailto:${config.email}?subject=${encodeURIComponent(
+        `${config.mailPrefix} — ${config.label} ${avg}% (${summary})`,
+      )}`;
     }
 
     rows.forEach((row, i) => {
-      row.querySelectorAll<HTMLButtonElement>('.dial-dot').forEach((dot) => {
-        dot.addEventListener('click', () => {
-          scores[i] = Number(dot.dataset.val);
-          try {
-            localStorage.setItem(config.storage, JSON.stringify(scores));
-          } catch {}
-          render();
-        });
+      const input = row.querySelector<HTMLInputElement>('[data-score]')!;
+      input.addEventListener('input', () => {
+        scores[i] = Number(input.value);
+        try {
+          localStorage.setItem(config.storage, JSON.stringify(scores));
+        } catch {}
+        render();
       });
     });
 

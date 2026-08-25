@@ -56,10 +56,10 @@ const config = {
           </div>
           <input
             type="range"
-            min="1"
-            max="5"
+            min="0"
+            max="100"
             step="1"
-            value="3"
+            value="60"
             data-score
             style={`accent-color:${q.color}`}
             aria-label={q.label}
@@ -98,8 +98,8 @@ const config = {
 
           <circle class="wheel-hub" r="31" />
           <text class="wheel-avg" text-anchor="middle" y="6">
-            <tspan data-avg font-size="17" font-weight="800">–</tspan>
-            <tspan font-size="8.5" dx="1.5" class="wheel-avg-denom">/5</tspan>
+            <tspan data-avg font-size="16" font-weight="800">–</tspan>
+            <tspan font-size="8.5" dx="1" class="wheel-avg-denom">%</tspan>
           </text>
         </svg>
 
@@ -179,10 +179,12 @@ const config = {
     try {
       scores = JSON.parse(localStorage.getItem(STORAGE) || '{}');
     } catch {}
+    // migrate old 1–5 scores to percent
+    for (const k of Object.keys(scores)) if (scores[k] <= 5) scores[k] = scores[k] * 20;
 
-    const radius = (v: number) => HUB + (v / 5) * (RIM - HUB);
+    const radius = (v: number) => HUB + (v / 100) * (RIM - HUB);
     const cur: Record<string, number> = {};
-    config.quadrants.forEach((q: any) => (cur[q.key] = radius(scores[q.key] ?? 3)));
+    config.quadrants.forEach((q: any) => (cur[q.key] = radius(scores[q.key] ?? 60)));
 
     let raf = 0;
     function animate() {
@@ -190,7 +192,7 @@ const config = {
       const start = performance.now();
       const from = { ...cur };
       const to: Record<string, number> = {};
-      config.quadrants.forEach((q: any) => (to[q.key] = radius(scores[q.key] ?? 3)));
+      config.quadrants.forEach((q: any) => (to[q.key] = radius(scores[q.key] ?? 60)));
       const DUR = 320;
       const tick = (now: number) => {
         const p = Math.min(1, (now - start) / DUR);
@@ -205,34 +207,40 @@ const config = {
       raf = requestAnimationFrame(tick);
     }
 
-    const verdict = (v: number) =>
-      v <= 2 ? config.verdicts.pain : v <= 4 ? config.verdicts.growth : config.verdicts.great;
+    const tone = (v: number) =>
+      v < 20 ? 'emergency' : v < 40 ? 'pain' : v < 60 ? 'growth' : v < 80 ? 'ok' : 'excellent';
+    const verdict = (v: number) => config.verdicts[tone(v)];
 
     function render() {
       let minKey = '';
-      let minVal = 6;
+      let minVal = 101;
       let sum = 0;
       for (const q of config.quadrants) {
-        const v = scores[q.key] ?? 3;
+        const v = scores[q.key] ?? 60;
         sum += v;
         const row = rows.find((r) => r.dataset.qkey === q.key);
         if (row) {
           const input = row.querySelector<HTMLInputElement>('[data-score]')!;
           if (Number(input.value) !== v) input.value = String(v);
-          row.querySelector<HTMLElement>('[data-verdict]')!.textContent = `${v}/5 · ${verdict(v)}`;
+          const verdictEl = row.querySelector<HTMLElement>('[data-verdict]')!;
+          verdictEl.textContent = `${v}% · ${verdict(v)}`;
+          verdictEl.dataset.tone = tone(v);
         }
         const chip = root.querySelector<HTMLElement>(`[data-chip="${q.key}"]`);
-        if (chip) chip.textContent = `${q.label} · ${v}`;
+        if (chip) {
+          chip.textContent = `${q.label} · ${v}%`;
+          chip.classList.toggle('chip-sos', v < 20);
+        }
         if (v < minVal) {
           minVal = v;
           minKey = q.key;
         }
       }
-      avgEl.textContent = (Math.round((sum / config.quadrants.length) * 10) / 10).toString();
+      avgEl.textContent = String(Math.round(sum / config.quadrants.length));
       animate();
 
       const minQ = config.quadrants.find((q: any) => q.key === minKey);
-      if (minVal >= 5) {
+      if (minVal >= 95) {
         loudestEl.textContent = config.balanced;
         openEl.style.display = 'none';
       } else {
@@ -242,7 +250,7 @@ const config = {
         openEl.href = minQ.href;
       }
       const summary = config.quadrants
-        .map((q: any) => `${q.label} ${scores[q.key] ?? 3}/5`)
+        .map((q: any) => `${q.label} ${scores[q.key] ?? 60}%`)
         .join(', ');
       ctaEl.href = `mailto:${config.email}?subject=${encodeURIComponent(`${config.mailPrefix}: ${summary}`)}`;
     }
