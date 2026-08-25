@@ -1,15 +1,8 @@
 ---
-import { site } from '../data/site';
-import { getContent, altHref, type Lang } from '../i18n';
-
-interface Props {
-  currentPath: string;
-  lang?: Lang;
-}
-
-const { currentPath, lang = 'en' } = Astro.props;
-const t = getContent(lang);
-const switchHref = altHref(lang, currentPath);
+// Hamburger toggle only. The drawer itself is rendered by MobileMenu.astro
+// outside the sticky header: the header's backdrop-filter makes it the
+// containing block for fixed descendants (WebKit enforces this), which
+// collapsed the fixed drawer to the header strip on iOS.
 ---
 
 <div class="mobile-nav-wrapper">
@@ -24,94 +17,4 @@ const switchHref = altHref(lang, currentPath);
       <span class="hamburger-inner"></span>
     </span>
   </button>
-
-  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
-    <div class="mobile-menu-content">
-      <div class="mobile-menu-header">
-        <span class="logo">
-          <span class="logo-mark" aria-hidden="true">MS</span>
-          <span>Max Sapo</span>
-        </span>
-        <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <nav class="mobile-nav-links" aria-label="Mobile navigation">
-        {t.nav.map((item) => {
-          const base = item.href.split('#')[0];
-          const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);
-          return (
-            <a
-              href={item.href}
-              class={`mobile-nav-link ${isActive ? 'active' : ''}`}
-              aria-current={isActive ? 'page' : undefined}
-            >
-              {item.label}
-            </a>
-          );
-        })}
-        <a href={switchHref} class="mobile-nav-link" title={t.alt.title}>{t.alt.label}</a>
-      </nav>
-
-      <div class="mobile-menu-footer">
-        <div class="mobile-social-links">
-          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a href={`mailto:${site.email}`}>Email</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-
-<script>
-  function setupMobileNav() {
-    const toggleBtn = document.getElementById('mobile-nav-toggle');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-    const menu = document.getElementById('mobile-menu');
-    const links = document.querySelectorAll('.mobile-nav-link');
-
-    if (!toggleBtn || !menu) return;
-
-    function openMenu() {
-      menu?.classList.add('is-open');
-      toggleBtn?.setAttribute('aria-expanded', 'true');
-      menu?.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('nav-locked');
-    }
-
-    function closeMenu() {
-      menu?.classList.remove('is-open');
-      toggleBtn?.setAttribute('aria-expanded', 'false');
-      menu?.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('nav-locked');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      const isOpen = menu.classList.contains('is-open');
-      if (isOpen) closeMenu();
-      else openMenu();
-    });
-
-    closeBtn?.addEventListener('click', closeMenu);
-    backdrop?.addEventListener('click', closeMenu);
-    links.forEach((link) => link.addEventListener('click', closeMenu));
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-        closeMenu();
-        toggleBtn?.focus();
-      }
-    });
-  }
-
-  setupMobileNav();
-  document.addEventListener('astro:page-load', setupMobileNav);
-</script>
