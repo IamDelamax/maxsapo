@@ -23,23 +23,23 @@ export const ru: Content = {
 
   hero: {
     eyebrow: 'Сибирь → Москва → Стэнфорд → Сан-Франциско',
-    title: 'Четыре года я продавал миру гугловские TPU.',
-    titleAccent: 'Потом ушёл строить лицо поверх этого кремния — а в мае 2026 вернулся к кремнию.',
+    title: 'Привет, я Макс. Днём я продаю суперкомпьютеры.',
+    titleAccent: 'По вечерам — читаю рэп, гоняюсь за калифорнийскими закатами и строю штуки, которые делают людей счастливее.',
     lede:
-      'Senior PM в Google Cloud TPU. Основатель Happyverse.AI. До этого: трансформерный чип в Etched, IPO на $355 млн, чартер CFA и три десятка треков под именем Delamax.',
+      'Senior PM в Google Cloud TPU, основатель Happyverse.AI — и тот самый парень, который ответил на видео-эссе Harvard Business School рэпом. В итоге поступил в Стэнфорд. Выводы делайте сами.',
     ctas: [
       { label: 'Смотреть видео', href: '/ru/watch', primary: true },
-      { label: 'Пруфы', href: '/ru/work', primary: false },
+      { label: 'Пруф, что я работаю', href: '/ru/work', primary: false },
       { label: 'Питчни мне идею', href: `mailto:${site.email}`, primary: false },
     ],
-    portraitAlt: 'Макс Сапо и Сергей Брин',
-    portraitCaption: 'С Сергеем Брином · Сан-Франциско',
+    portraitAlt: 'Макс смеётся на скалистом калифорнийском берегу',
+    portraitCaption: 'Тихоокеанский берег · обычный уровень серьёзности',
   },
 
   stats: [
     { value: '4', label: 'поколения Google TPU, выведенные на рынок' },
     { value: '$355М', label: 'IPO Детского мира в Системе, 2017' },
-    { value: '30+', label: 'треков записано как Delamax с 2003 года' },
+    { value: '30+', label: 'треков как Delamax. Грэмми на подходе.' },
     { value: '4', label: 'основано: Happyverse, Power Couple Club, finetuned.me, MLHappy' },
   ],
 
@@ -47,7 +47,7 @@ export const ru: Content = {
     eyebrow: 'Целиком',
     title: 'Четыре тумблера, а не один.',
     lede:
-      'Я живу по четырём тумблерам — любовь, здоровье, работа, деньги. У каждого здесь своя комната.',
+      'Любовь, здоровье, работа, деньги — четыре тумблера, по которым я реально живу. Нажми и посмотри.',
     items: [
       {
         key: 'love',

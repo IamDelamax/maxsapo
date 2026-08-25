@@ -22,23 +22,23 @@ export const en = {
 
   hero: {
     eyebrow: 'Siberia → Moscow → Stanford → San Francisco',
-    title: 'I spent four years making Google’s TPUs sell.',
-    titleAccent: 'Then I left to build the face on top of them — and in May 2026 I came back to the silicon.',
+    title: 'Hi, I’m Max. I sell supercomputers by day.',
+    titleAccent: 'By night I rap, chase California sunsets, and build things that make people happier.',
     lede:
-      'Senior PM on Google Cloud TPU. Founder of Happyverse.AI. Before that: a transformer chip at Etched, a $355M IPO, a CFA charter, and thirty-odd rap tracks as Delamax.',
+      'Senior PM on Google Cloud TPU, founder of Happyverse.AI — and the guy who answered Harvard Business School’s video essay with a rap. I ended up at Stanford. Draw your own conclusions.',
     ctas: [
       { label: 'Watch me talk', href: '/watch', primary: true },
-      { label: 'The receipts', href: '/work', primary: false },
+      { label: 'Proof I actually work', href: '/work', primary: false },
       { label: 'Pitch me an idea', href: `mailto:${site.email}`, primary: false },
     ],
-    portraitAlt: 'Max Sapo with Sergey Brin',
-    portraitCaption: 'With Sergey Brin · San Francisco',
+    portraitAlt: 'Max laughing on the rocky California coast',
+    portraitCaption: 'Pacific coast · default level of seriousness',
   },
 
   stats: [
     { value: '4', label: 'generations of Google TPU taken to market' },
     { value: '$355M', label: 'IPO led at Sistema — Detsky Mir, 2017' },
-    { value: '30+', label: 'tracks recorded as Delamax since 2003' },
+    { value: '30+', label: 'tracks recorded as Delamax. Grammy pending.' },
     { value: '4', label: 'things founded: Happyverse, Power Couple Club, finetuned.me, MLHappy' },
   ],
 
@@ -46,7 +46,7 @@ export const en = {
     eyebrow: 'The whole picture',
     title: 'Four dials, not one.',
     lede:
-      'I run my life on four dials — love, health, work, wealth. Each one has its own room here.',
+      'Love, health, work, wealth — the four dials I actually run my life on. Click one and poke around.',
     items: [
       {
         key: 'love',
