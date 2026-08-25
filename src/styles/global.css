@@ -981,3 +981,6 @@ body.nav-locked { overflow: hidden; }
 .mobile-nav-link.mobile-sub.pillar-health { color: var(--qcolor); }
 .mobile-nav-link.mobile-sub.pillar-work { color: var(--qcolor); }
 .mobile-nav-link.mobile-sub.pillar-wealth { color: var(--qcolor); }
+
+.logo-wheel { display: block; flex: none; transition: transform 300ms ease; }
+.logo:hover .logo-wheel { transform: rotate(90deg); }

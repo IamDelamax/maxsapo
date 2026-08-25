@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import LogoMark from './LogoMark.astro';
 import { getContent, altHref, type Lang } from '../i18n';
 
 interface Props {
@@ -17,7 +18,7 @@ const switchHref = altHref(lang, currentPath);
   <div class="mobile-menu-content">
     <div class="mobile-menu-header">
       <span class="logo">
-        <span class="logo-mark" aria-hidden="true">MS</span>
+        <LogoMark />
         <span>Max Sapo</span>
       </span>
       <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">

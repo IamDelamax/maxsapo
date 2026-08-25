@@ -4,6 +4,7 @@ import { site } from '../data/site';
 import { getContent, altHref, type Lang } from '../i18n';
 import MobileNav from '../components/MobileNav.astro';
 import PillarIcon from '../components/PillarIcon.astro';
+import LogoMark from '../components/LogoMark.astro';
 import SocialIcons from '../components/SocialIcons.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import { ClientRouter } from 'astro:transitions';
@@ -110,7 +111,7 @@ const jsonLd = {
     <header class="site-header">
       <div class="container header-inner">
         <a class="logo" href={lang === 'ru' ? '/ru/' : '/'} aria-label="Max Sapo home">
-          <span class="logo-mark" aria-hidden="true">MS</span>
+          <LogoMark />
           <span class="logo-name">Max Sapo</span>
         </a>
         <nav class="nav" aria-label="Main navigation">
