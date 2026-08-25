@@ -20,6 +20,14 @@ export const videos: Video[] = [
     featured: true,
   },
   {
+    id: 'argam-talks',
+    youtubeId: 's8eEINcvLC0',
+    title: 'The Future of Voice AI & Digital Avatars — Argam Talks',
+    date: '2025-10-24',
+    category: 'talks',
+    featured: true,
+  },
+  {
     id: 'aizada-marat',
     youtubeId: 'LabkqsPPO5U',
     title: 'Макс Сапожников об MBA Стэнфорда и своём бэкграунде — Aizada Marat',

@@ -205,6 +205,8 @@ export const ru: Content = {
     notes: {
       'bay-signal':
         'Первый выпуск The Bay Signal: Happyverse, Стэнфорд и что на самом деле нужно, чтобы строить AI-аватары в Сан-Франциско.',
+      'argam-talks':
+        'Argam Talks: технический и философский разговор про voice agents, цифровых аватаров, живой контакт, промптинг, эксперименты и будущее human-computer interaction.',
       'aizada-marat':
         'Длинный разговор с Айзадой Марат про MBA в Стэнфорде и дорогу, которая к нему привела.',
       'agi-summit':

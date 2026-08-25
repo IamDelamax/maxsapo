@@ -204,6 +204,8 @@ export const en = {
     notes: {
       'bay-signal':
         'The Bay Signal, episode one: Happyverse, Stanford, and what it actually takes to build AI avatars in San Francisco.',
+      'argam-talks':
+        'Argam Talks: a technical and philosophical dive into voice agents, digital avatars, authentic connection, prompting, experimentation, and the future of human-computer interaction.',
       'aizada-marat':
         'A long-form conversation (in Russian) with Aizada Marat about the Stanford MBA and the road that led there.',
       'agi-summit':
