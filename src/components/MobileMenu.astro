@@ -1,0 +1,91 @@
+---
+import { site } from '../data/site';
+import { getContent, altHref, type Lang } from '../i18n';
+
+interface Props {
+  currentPath: string;
+  lang?: Lang;
+}
+
+const { currentPath, lang = 'en' } = Astro.props;
+const t = getContent(lang);
+const switchHref = altHref(lang, currentPath);
+---
+
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+  <div class="mobile-menu-content">
+    <div class="mobile-menu-header">
+      <span class="logo">
+        <span class="logo-mark" aria-hidden="true">MS</span>
+        <span>Max Sapo</span>
+      </span>
+      <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links" aria-label="Mobile navigation">
+      {t.nav.map((item) => {
+        const base = item.href.split('#')[0];
+        const isActive = base !== '/' && base !== '/ru/' && currentPath.startsWith(base);
+        return (
+          <a
+            href={item.href}
+            class={`mobile-nav-link ${isActive ? 'active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+      <a href={switchHref} class="mobile-nav-link" title={t.alt.title}>{t.alt.label}</a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      <div class="mobile-social-links">
+        <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href={`mailto:${site.email}`}>Email</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Delegated listeners bound once at module scope: astro:page-load also
+  // fires on the initial load, so per-element binding there attached two
+  // click handlers to the toggle and the menu closed as soon as it opened.
+  // Delegation survives ClientRouter body swaps without re-binding.
+  const getMenu = () => document.getElementById('mobile-menu');
+
+  function setOpen(open: boolean) {
+    const menu = getMenu();
+    if (!menu) return;
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    document.getElementById('mobile-nav-toggle')?.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('nav-locked', open);
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target instanceof Element ? e.target : null;
+    if (!target) return;
+    if (target.closest('#mobile-nav-toggle')) {
+      setOpen(!getMenu()?.classList.contains('is-open'));
+    } else if (target.closest('#mobile-menu-close, #mobile-menu-backdrop, .mobile-nav-link')) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && getMenu()?.classList.contains('is-open')) {
+      setOpen(false);
+      document.getElementById('mobile-nav-toggle')?.focus();
+    }
+  });
+</script>

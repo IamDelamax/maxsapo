@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site } from '../data/site';
 import { getContent, altHref, type Lang } from '../i18n';
 import MobileNav from '../components/MobileNav.astro';
+import MobileMenu from '../components/MobileMenu.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -102,9 +103,10 @@ const jsonLd = {
           })}
           <a href={switchHref} class="nav-link lang-switch" title={t.alt.title}>{t.alt.label}</a>
         </nav>
-        <MobileNav currentPath={currentPath} lang={lang} />
+        <MobileNav />
       </div>
     </header>
+    <MobileMenu currentPath={currentPath} lang={lang} />
     <main>
       <slot />
     </main>
