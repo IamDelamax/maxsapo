@@ -26,12 +26,17 @@ const homeVideos = ['bay-signal', 'digital-human', 'chakroff', 'happyverse-rap']
         {t.hero.title}
         <span class="accent">{t.hero.titleAccent}</span>
       </h1>
-      <p class="lede">{t.hero.lede}</p>
+      <p class="lede">
+        {t.hero.lede.pre}<a class="lede-link" href={t.hero.lede.linkHref}>{t.hero.lede.linkLabel}</a>{t.hero.lede.post}
+      </p>
       <div class="actions">
         {t.hero.ctas.map((cta) => (
           <a class={cta.primary ? 'button primary' : 'button'} href={cta.href}>{cta.label}</a>
         ))}
       </div>
+      <ul class="cred-strip" aria-label="Credentials">
+        {t.hero.credibility.map((item) => <li>{item}</li>)}
+      </ul>
     </div>
     <figure class="hero-portrait">
       <img src="/img/hero-coast.jpg" alt={t.hero.portraitAlt} width="1400" height="1050" loading="eager" />
@@ -98,6 +103,23 @@ const homeVideos = ['bay-signal', 'digital-human', 'chakroff', 'happyverse-rap']
           {t.coaching.note}
           <a href={t.coaching.noteLink.href} target="_blank" rel="noopener noreferrer">{t.coaching.noteLink.label}</a>
         </p>
+      </div>
+    </div>
+    <div class="grid two coaching-proof">
+      <div class="card coaching-why">
+        <div class="card-meta">{t.coaching.whyTitle}</div>
+        <ul>
+          {t.coaching.why.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="card coaching-faq">
+        <div class="card-meta">{t.coaching.faqTitle}</div>
+        {t.coaching.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>

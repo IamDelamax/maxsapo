@@ -25,10 +25,15 @@ export const en = {
     eyebrow: 'Siberia → Moscow → Stanford → San Francisco',
     title: 'Hi, I’m Max. I sell supercomputers by day.',
     titleAccent: 'By night I rap, chase California sunsets, and build things that make people happier.',
-    lede:
-      'Senior PM on Google Cloud TPU, founder of Happyverse.AI — and the guy who answered Harvard Business School’s video essay with a rap. I ended up at Stanford. Draw your own conclusions.',
+    lede: {
+      pre: 'Senior PM on Google Cloud TPU, founder of Happyverse.AI — and the guy who ',
+      linkLabel: 'answered Harvard Business School’s video essay with a rap',
+      linkHref: '/#delamax',
+      post: '. I ended up at Stanford. Draw your own conclusions.',
+    },
+    credibility: ['Google', 'Stanford GSB', 'CFA charterholder', 'Etched', 'Georgia Tech MSc', 'Happyverse — backed by Village Global & Jeff Dean'],
     ctas: [
-      { label: 'Watch me talk', href: '/watch', primary: true },
+      { label: 'Watch me talk', href: '/#watch', primary: true },
       { label: 'Proof I actually work', href: '/work', primary: false },
       { label: 'Pitch me an idea', href: `mailto:${site.email}`, primary: false },
     ],
@@ -233,6 +238,27 @@ export const en = {
     },
     note: 'Too formal? Just DM me —',
     noteLink: { label: '@delamax', href: site.social.instagram },
+    whyTitle: 'Why me — receipts, not vibes',
+    why: [
+      'Two promotions and 70+ peer bonuses at Google, including from Chief AI Scientist Jeff Dean.',
+      'HIPERFLOW is the framework behind Happyverse Confidants — the company I founded, pre-seed backed by Village Global and Jeff Dean.',
+      'CFA charterholder. I treat a life like a portfolio: diversified, rebalanced, reviewed on a schedule.',
+    ],
+    faqTitle: 'The questions a skeptic asks',
+    faq: [
+      {
+        q: 'Are you a certified coach or therapist?',
+        a: 'No, and I won’t pretend to be. I’m an operator with a framework. If what you actually need is therapy, I’ll say so on the first call and point you to a professional.',
+      },
+      {
+        q: 'What does it cost after the free call?',
+        a: 'Nothing, unless we both want to continue. If we do, we design the cadence and the price together, out loud, on that call. No packages, no funnels, no surprise upsell.',
+      },
+      {
+        q: 'Why does a Google PM coach people at all?',
+        a: 'Because I built HIPERFLOW for a product and realized I use it on my own life more than the product ever did. Coaching is where the framework meets a real life — mine included.',
+      },
+    ],
   },
 
   california: {

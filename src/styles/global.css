@@ -845,3 +845,60 @@ body.nav-locked { overflow: hidden; }
   .check-card, .dial-check { grid-template-columns: 1fr; gap: 24px; padding: 26px 22px; }
   .dial-dot { width: 44px; height: 44px; }
 }
+
+/* ---------- credibility strip ---------- */
+.cred-strip {
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 0;
+  color: var(--subtle);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.cred-strip li { display: inline-flex; align-items: center; }
+.cred-strip li + li::before { content: '·'; margin: 0 10px; color: var(--line); }
+.lede-link { color: var(--accent); border-bottom: 1px solid rgba(255, 103, 25, 0.4); }
+.lede-link:hover { border-bottom-color: var(--accent); }
+
+/* ---------- coaching proof ---------- */
+.coaching-proof { margin-top: 18px; }
+.coaching-why ul { margin: 0; padding: 0 0 0 2px; list-style: none; }
+.coaching-why li {
+  position: relative;
+  padding: 8px 0 8px 26px;
+  color: var(--muted);
+}
+.coaching-why li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: var(--accent);
+  font-weight: 800;
+}
+.coaching-faq details { border-top: 1px solid var(--line); padding: 10px 0; }
+.coaching-faq details:first-of-type { border-top: 0; padding-top: 0; }
+.coaching-faq summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+  list-style: none;
+  position: relative;
+  padding-right: 26px;
+}
+.coaching-faq summary::-webkit-details-marker { display: none; }
+.coaching-faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 800;
+  transition: transform 160ms ease;
+}
+.coaching-faq details[open] summary::after { transform: rotate(45deg); }
+.coaching-faq details p { margin: 8px 0 0; color: var(--muted); }
