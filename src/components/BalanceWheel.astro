@@ -1,0 +1,166 @@
+---
+import { getContent, type Lang } from '../i18n';
+import { site } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getContent(lang);
+const c = t.check;
+
+const COLORS: Record<string, string> = {
+  love: '#e8447c',
+  health: '#16a34a',
+  work: '#f59e0b',
+  wealth: '#0284c7',
+};
+
+const quadrants = t.pillars.items.map((p) => ({
+  key: p.key,
+  label: p.label,
+  href: p.href,
+  color: COLORS[p.key],
+}));
+
+const config = {
+  email: site.email,
+  mailPrefix: c.mailPrefix,
+  verdicts: c.verdicts,
+  loudestPrefix: c.loudestPrefix,
+  balanced: c.balanced,
+  openTemplate: c.openTemplate,
+  quadrants: quadrants.map(({ key, label, href }) => ({ key, label, href })),
+};
+---
+<section class="container section" id="check">
+  <div class="section-header">
+    <div>
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h2>{c.title}</h2>
+    </div>
+    <p>{c.lede}</p>
+  </div>
+
+  <div class="check-card card" data-balance data-config={JSON.stringify(config)}>
+    <div class="check-controls">
+      {quadrants.map((q) => (
+        <div class="check-row" data-qkey={q.key}>
+          <div class="check-row-head">
+            <span class="check-label" style={`color:${q.color}`}>{q.label}</span>
+            <span class="check-verdict" data-verdict></span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            step="1"
+            value="3"
+            data-score
+            style={`accent-color:${q.color}`}
+            aria-label={q.label}
+          />
+        </div>
+      ))}
+      <p class="check-loudest" data-loudest></p>
+      <div class="actions check-actions">
+        <a class="button primary" data-cta href={`mailto:${site.email}`}>{c.cta}</a>
+        <a class="button" data-open href="/#life"></a>
+      </div>
+    </div>
+    <div class="check-wheel" aria-hidden="true">
+      <svg viewBox="-112 -112 224 224" data-wheel>
+        <circle r="100" class="wheel-grid" />
+        <circle r="70" class="wheel-grid" />
+        <circle r="40" class="wheel-grid" />
+        <line x1="-104" y1="0" x2="104" y2="0" class="wheel-grid" />
+        <line x1="0" y1="-104" x2="0" y2="104" class="wheel-grid" />
+        {quadrants.map((q, i) => (
+          <path
+            data-seg={q.key}
+            transform={`rotate(${i * 90 - 90})`}
+            fill={q.color}
+            fill-opacity="0.82"
+            stroke="#ffffff"
+            stroke-width="2"
+          />
+        ))}
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupBalanceWheel() {
+    const root = document.querySelector('[data-balance]') as HTMLElement | null;
+    if (!root || root.dataset.ready === '1') return;
+    root.dataset.ready = '1';
+    const config = JSON.parse(root.dataset.config || '{}');
+    const STORAGE = 'hiperflow.home';
+
+    const rows = Array.from(root.querySelectorAll<HTMLElement>('.check-row'));
+    const loudestEl = root.querySelector<HTMLElement>('[data-loudest]')!;
+    const ctaEl = root.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const openEl = root.querySelector<HTMLAnchorElement>('[data-open]')!;
+
+    let scores: Record<string, number> = {};
+    try {
+      scores = JSON.parse(localStorage.getItem(STORAGE) || '{}');
+    } catch {}
+
+    const verdict = (v: number) =>
+      v <= 2 ? config.verdicts.pain : v <= 4 ? config.verdicts.growth : config.verdicts.great;
+
+    const seg = (r: number) => `M 0 0 L ${r} 0 A ${r} ${r} 0 0 1 0 ${r} Z`;
+
+    function render() {
+      let minKey = '';
+      let minVal = 6;
+      for (const q of config.quadrants) {
+        const v = scores[q.key] ?? 3;
+        const row = rows.find((r) => r.dataset.qkey === q.key);
+        if (row) {
+          const input = row.querySelector<HTMLInputElement>('[data-score]')!;
+          if (Number(input.value) !== v) input.value = String(v);
+          row.querySelector<HTMLElement>('[data-verdict]')!.textContent = `${v}/5 · ${verdict(v)}`;
+        }
+        const path = root.querySelector<SVGPathElement>(`[data-seg="${q.key}"]`);
+        if (path) path.setAttribute('d', seg(26 + (v / 5) * 74));
+        if (v < minVal) {
+          minVal = v;
+          minKey = q.key;
+        }
+      }
+      const minQ = config.quadrants.find((q: any) => q.key === minKey);
+      if (minVal >= 5) {
+        loudestEl.textContent = config.balanced;
+        openEl.style.display = 'none';
+      } else {
+        loudestEl.textContent = `${config.loudestPrefix} ${minQ.label} — ${verdict(minVal)}.`;
+        openEl.style.display = '';
+        openEl.textContent = config.openTemplate.replace('{label}', minQ.label);
+        openEl.href = minQ.href;
+      }
+      const summary = config.quadrants
+        .map((q: any) => `${q.label} ${scores[q.key] ?? 3}/5`)
+        .join(', ');
+      ctaEl.href = `mailto:${config.email}?subject=${encodeURIComponent(`${config.mailPrefix}: ${summary}`)}`;
+    }
+
+    rows.forEach((row) => {
+      const input = row.querySelector<HTMLInputElement>('[data-score]')!;
+      input.addEventListener('input', () => {
+        scores[row.dataset.qkey!] = Number(input.value);
+        try {
+          localStorage.setItem(STORAGE, JSON.stringify(scores));
+        } catch {}
+        render();
+      });
+    });
+
+    render();
+  }
+
+  setupBalanceWheel();
+  document.addEventListener('astro:page-load', setupBalanceWheel);
+</script>

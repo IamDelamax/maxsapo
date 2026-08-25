@@ -756,3 +756,92 @@ body.nav-locked { overflow: hidden; }
   border-color: var(--accent);
   transform: translateY(-2px);
 }
+
+/* ---------- balance wheel (home) ---------- */
+.check-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 40px;
+  align-items: center;
+  padding: 36px 40px;
+}
+.check-row { padding: 10px 0; }
+.check-row-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.check-label { font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.85rem; }
+.check-verdict { color: var(--muted); font-size: 0.88rem; font-weight: 600; }
+.check-row input[type='range'] { width: 100%; height: 26px; cursor: pointer; }
+.check-loudest { color: var(--text); font-weight: 650; margin: 14px 0 0; min-height: 1.4em; }
+.check-actions { margin-top: 16px; }
+.check-wheel svg { width: 100%; max-width: 340px; display: block; margin: 0 auto; }
+.wheel-grid { fill: none; stroke: rgba(36, 28, 20, 0.1); stroke-width: 1.4; }
+[data-seg] { transition: d 260ms ease; }
+
+/* ---------- dial check (quadrant pages) ---------- */
+.dial-check {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 40px;
+  padding: 36px 40px;
+  align-items: center;
+}
+.dial-check h3 { font-size: 1.6rem; margin: 0 0 8px; }
+.dial-check .eyebrow { color: var(--qcolor, var(--accent)); margin-bottom: 10px; }
+.dial-check-intro { color: var(--muted); margin: 0 0 18px; }
+.dial-check-row { padding: 10px 0; border-top: 1px solid var(--line); }
+.dial-check-row:first-child { border-top: 0; }
+.dial-check-row-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.dial-check-name { font-weight: 700; }
+.dial-check-verdict { font-size: 0.82rem; font-weight: 700; }
+.dial-check-verdict[data-tone='pain'] { color: #dc2626; }
+.dial-check-verdict[data-tone='growth'] { color: #d97706; }
+.dial-check-verdict[data-tone='great'] { color: #16a34a; }
+.dial-dots { display: flex; gap: 8px; }
+.dial-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+.dial-dot:hover { transform: translateY(-2px); border-color: var(--qcolor, var(--accent)); }
+.dial-dot.active {
+  background: var(--qcolor, var(--accent));
+  border-color: var(--qcolor, var(--accent));
+  color: #ffffff;
+}
+.dial-check-result { text-align: center; }
+.dial-ring { position: relative; width: 160px; margin: 0 auto; }
+.dial-ring svg { width: 100%; display: block; }
+.ring-track { fill: none; stroke: rgba(36, 28, 20, 0.08); stroke-width: 10; }
+.ring-fill {
+  fill: none;
+  stroke: var(--qcolor, var(--accent));
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 0 251.2;
+  transition: stroke-dasharray 300ms ease;
+}
+.dial-ring-value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.dial-ring-value small { font-size: 0.9rem; color: var(--subtle); font-weight: 700; }
+.dial-check-score-label { color: var(--subtle); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin: 10px 0 2px; }
+.dial-check-overall { color: var(--qcolor, var(--accent)); font-weight: 800; margin: 0 0 16px; min-height: 1.3em; }
+.dial-check-note { color: var(--subtle); font-size: 0.85rem; margin: 12px 0 0; }
+.stat-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+.stat-link { transition: border-color 150ms ease, transform 150ms ease; display: block; }
+
+@media (max-width: 860px) {
+  .check-card, .dial-check { grid-template-columns: 1fr; gap: 24px; padding: 26px 22px; }
+  .dial-dot { width: 44px; height: 44px; }
+}

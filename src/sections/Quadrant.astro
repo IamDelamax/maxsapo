@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PillarIcon from '../components/PillarIcon.astro';
+import DialCheck from '../components/DialCheck.astro';
 import { getContent, type Lang } from '../i18n';
 
 interface Props {
@@ -38,6 +39,8 @@ const q = t.quadrants[quadrant];
       ))}
     </div>
   </section>
+
+  <DialCheck lang={lang} quadrant={quadrant} />
 
   <section class={`container section q-${quadrant}`}>
     <div class="section-header">

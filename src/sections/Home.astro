@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import PillarIcon from '../components/PillarIcon.astro';
+import BalanceWheel from '../components/BalanceWheel.astro';
 import { getContent, type Lang } from '../i18n';
 import { site } from '../data/site';
 import { videos } from '../data/videos';
@@ -13,7 +14,7 @@ const { lang } = Astro.props;
 const t = getContent(lang);
 const heroVideo = videos.find((v) => v.id === 'agi-summit')!;
 const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
-const homeVideos = ['bay-signal', 'digital-human', 'ai-coaching', 'happyverse-rap']
+const homeVideos = ['bay-signal', 'digital-human', 'chakroff', 'happyverse-rap']
   .map((id) => videos.find((v) => v.id === id)!)
   .filter(Boolean);
 ---
@@ -39,12 +40,19 @@ const homeVideos = ['bay-signal', 'digital-human', 'ai-coaching', 'happyverse-ra
   </section>
 
   <section class="container stats-band" aria-label="Numbers">
-    {t.stats.map((s) => (
-      <div class="stat">
-        <span class="stat-value">{s.value}</span>
-        <span class="stat-label">{s.label}</span>
-      </div>
-    ))}
+    {t.stats.map((s) =>
+      'href' in s && s.href ? (
+        <a class="stat stat-link" href={s.href} target="_blank" rel="noopener noreferrer">
+          <span class="stat-value">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </a>
+      ) : (
+        <div class="stat">
+          <span class="stat-value">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ),
+    )}
   </section>
 
 
@@ -71,6 +79,8 @@ const homeVideos = ['bay-signal', 'digital-human', 'ai-coaching', 'happyverse-ra
       ))}
     </div>
   </section>
+
+  <BalanceWheel lang={lang} />
 
   <section class="container section" id="coaching">
     <div class="coaching-band">
@@ -122,7 +132,10 @@ const homeVideos = ['bay-signal', 'digital-human', 'ai-coaching', 'happyverse-ra
             </div>
           ))}
         </div>
-        <a class="button" href={t.delamax.cta.href}>{t.delamax.cta.label}</a>
+        <div class="actions">
+          <a class="button" href={t.delamax.cta.href}>{t.delamax.cta.label}</a>
+          <a class="button" href={t.delamax.cta2.href} target="_blank" rel="noopener noreferrer">{t.delamax.cta2.label}</a>
+        </div>
       </div>
       <div class="delamax-video">
         <YouTubeEmbed youtubeId={rapVideo.youtubeId} title={rapVideo.title} />

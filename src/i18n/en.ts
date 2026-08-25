@@ -39,7 +39,7 @@ export const en = {
   stats: [
     { value: '4', label: 'generations of Google TPU taken to market' },
     { value: '$355M', label: 'IPO led at Sistema — Detsky Mir, 2017' },
-    { value: '30+', label: 'tracks recorded as Delamax. Grammy pending.' },
+    { value: '30+', label: 'tracks as Delamax — on SoundCloud. Grammy pending.', href: site.social.soundcloud },
     { value: '4', label: 'things founded: Happyverse, Power Couple Club, finetuned.me, MLHappy' },
   ],
 
@@ -60,7 +60,7 @@ export const en = {
         key: 'health',
         label: 'Health',
         title: 'You cannot out-think a body you are wrecking.',
-        tagline: 'Body, emotions, attention — and finetuned.me.',
+        tagline: 'Body, emotions, energy — and finetuned.me.',
         href: '/health',
       },
       {
@@ -74,7 +74,7 @@ export const en = {
         key: 'wealth',
         label: 'Wealth',
         title: 'I did finance properly before I did tech.',
-        tagline: 'CFA, a $355M IPO, angel cheques — and legacy.',
+        tagline: 'Earnings, freedom, legacy — and a $355M IPO.',
         href: '/wealth',
       },
     ],
@@ -119,13 +119,13 @@ export const en = {
       eyebrow: 'Dial 02 · Health',
       title: 'You cannot out-think a body you are wrecking.',
       lede:
-        'Health is the platform everything else runs on — the body, the emotions, and the attention you refuse to surrender to a feed.',
+        'Health is the platform everything else runs on — the body that carries you and the emotions that color every day on the calendar.',
       dialsTitle: 'The dials I watch',
       dials: [
         { name: 'Fitness', desc: 'A routine that actually repeats. Consistency beats intensity.' },
-        { name: 'Nutrition & recharging', desc: 'Food quality, sleep, and rest — the unglamorous compounding.' },
+        { name: 'Nutrition', desc: 'Food quality and balance — the unglamorous compounding.' },
+        { name: 'Recharging', desc: 'Sleep and rest: the only performance enhancer that is free, legal, and still ignored.' },
         { name: 'Emotions', desc: 'Enthusiasm, empathy, and managing the SUFFER list: stress, uncertainty, fears, failures, evil, regrets.' },
-        { name: 'Freedom', desc: 'Agency over your own attention. The dial most people quietly lose to their phone.' },
       ],
       doingTitle: 'What I actually do about it',
       doing: [
@@ -137,11 +137,11 @@ export const en = {
           linkLabel: 'finetuned.me',
         },
         {
-          title: 'MLHappy.org',
+          title: 'Coaching, if you want backup',
           body:
-            'The non-profit I started to put AI behind well-being instead of engagement metrics. It is where finetuned.me and the HIPERFLOW framework came from.',
-          href: '',
-          linkLabel: '',
+            'A dial stuck below 3 for months is rarely an information problem — it is a system problem. Mapping the system is exactly what my free first call is for.',
+          href: '/#coaching',
+          linkLabel: 'Book a free call',
         },
       ],
       back: { label: '← All four dials', href: '/#life' },
@@ -151,11 +151,12 @@ export const en = {
       eyebrow: 'Dial 04 · Wealth',
       title: 'I did finance properly before I did tech.',
       lede:
-        'Money matters, but wealth is bigger than money — it is earnings, what the money actually buys, and the legacy that outlives the accounts.',
+        'Money matters, but wealth is bigger — earnings, what they buy, the freedom they unlock, and the legacy that outlives the accounts.',
       dialsTitle: 'The dials I watch',
       dials: [
         { name: 'Earnings', desc: 'Income from work, side projects, and investments — several engines, not one.' },
         { name: 'Spending', desc: 'What the money buys. Mostly it should buy time.' },
+        { name: 'Freedom', desc: 'Agency over your money, your time, your attention. Freedom is what wealth is for — and addictions are its quiet tax.' },
         { name: 'Character & legacy', desc: 'What remains when the accounts settle — something to be proud of and remembered by.' },
       ],
       doingTitle: 'What I actually do about it',
@@ -190,6 +191,30 @@ export const en = {
       { value: '2007', label: 'college Rap Music Award' },
     ],
     cta: { label: 'Watch the videos', href: '/watch#music' },
+    cta2: { label: 'Delamax on SoundCloud', href: site.social.soundcloud },
+  },
+
+  check: {
+    eyebrow: 'Honest mirror',
+    title: 'The 60-second life check.',
+    lede: 'Four sliders, zero judgment. The wheel just shows where the life is leaking.',
+    verdicts: { pain: 'Pain point', growth: 'Growth area', great: 'Great' },
+    loudestPrefix: 'Loudest dial right now:',
+    balanced: 'All four at five. Either you are lying, or I should be booking a call with you.',
+    cta: 'Fix the loudest one with me — free call',
+    openTemplate: 'Open {label} →',
+    mailPrefix: 'Coaching — life check',
+  },
+
+  dialCheck: {
+    eyebrow: '60-second check',
+    title: 'Now rate yours.',
+    intro: 'Tap a score for each dial: 1–2 is a pain point, 3–4 a growth area, 5 is great. Scores stay in your browser.',
+    scoreLabel: 'Quadrant score',
+    verdicts: { pain: 'Pain point', growth: 'Growth area', great: 'Great' },
+    cta: 'Talk it through — first call is free',
+    note: 'The email arrives pre-filled with your scores, so we skip straight to the real conversation.',
+    mailPrefix: 'Coaching',
   },
 
   coaching: {
@@ -307,8 +332,6 @@ export const en = {
         'A long-form conversation (in Russian) with Aizada Marat about the Stanford MBA and the road that led there.',
       'agi-summit':
         'The summit I built and hosted in San Francisco, November 2025 — one question all day: if intelligence gets cheap, what does the interface look like?',
-      'ai-coaching':
-        'A long conversation about what AI can and cannot do inside a coaching relationship.',
       chakroff:
         'Sitting down with Alek Chakroff on the coach we built and what a machine understands about a person.',
       'uncanny-valley':

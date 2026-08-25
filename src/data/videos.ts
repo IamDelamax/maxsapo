@@ -44,14 +44,6 @@ export const videos: Video[] = [
     featured: true,
   },
   {
-    id: 'ai-coaching',
-    youtubeId: 'vi0dSCc6DO0',
-    title: 'AI and Coaching: A Discussion',
-    date: '2025-08-04',
-    category: 'talks',
-    featured: true,
-  },
-  {
     id: 'chakroff',
     youtubeId: '6xBn1Nr3OsI',
     title: 'VIPERFLOW Coach — Conversation with Alek Chakroff',

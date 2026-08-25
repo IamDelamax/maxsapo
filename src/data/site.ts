@@ -14,6 +14,7 @@ export const site = {
     github: 'https://github.com/IamDelamax',
     x: 'https://x.com/maxhappyverse',
     substack: 'https://substack.com/@delamax',
+    soundcloud: 'https://soundcloud.com/delamax',
   },
   ventures: {
     happyverse: 'https://happyverse.ai',
