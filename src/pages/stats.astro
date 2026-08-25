@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+// Every page that should show up in the per-page table. GoatCounter records
+// trailing-slash paths (normalized in BaseLayout), so keep the slashes here.
+const pages = [
+  { path: '/', label: 'Home' },
+  { path: '/work/', label: 'Work' },
+  { path: '/watch/', label: 'Watch' },
+  { path: '/now/', label: 'Now' },
+  { path: '/love/', label: 'Love' },
+  { path: '/health/', label: 'Health' },
+  { path: '/wealth/', label: 'Wealth' },
+  { path: '/ru/', label: 'Home · RU' },
+  { path: '/ru/work/', label: 'Work · RU' },
+  { path: '/ru/watch/', label: 'Watch · RU' },
+  { path: '/ru/now/', label: 'Now · RU' },
+  { path: '/ru/love/', label: 'Love · RU' },
+  { path: '/ru/health/', label: 'Health · RU' },
+  { path: '/ru/wealth/', label: 'Wealth · RU' },
+];
+const goatcounter = site.goatcounter;
+---
+
+<BaseLayout title="Stats · Max Sapo" description="Visitor stats for maxsapo.me" noindex>
+  <div class="container stats-page">
+    <p class="eyebrow">Analytics</p>
+    <h1>Site stats</h1>
+
+    <div id="stats-error" class="stats-error" hidden>
+      <strong>No data yet.</strong>
+      <p>
+        Stats come from GoatCounter and need a one-time setup: <a href="https://www.goatcounter.com/signup" target="_blank" rel="noopener noreferrer">create the account</a> with
+        code <code>maxsapo</code>, then in its Settings enable the <em>visitor counter</em> so
+        this page may read the counts.
+      </p>
+    </div>
+
+    <div class="stats-total">
+      <span class="stats-total-num" id="stats-total">—</span>
+      <span class="stats-total-label">visitors, all time</span>
+    </div>
+
+    <h2>By page</h2>
+    <ul class="stats-list" id="stats-list">
+      {pages.map((p) => (
+        <li data-path={p.path}>
+          <span class="stats-bar" aria-hidden="true"></span>
+          <span class="stats-label">{p.label}</span>
+          <span class="stats-count">—</span>
+        </li>
+      ))}
+    </ul>
+
+    <p class="stats-more">
+      Referrers, countries, and daily graphs live in the{' '}
+      <a href={goatcounter} target="_blank" rel="noopener noreferrer">full GoatCounter dashboard</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<script is:inline define:vars={{ goatcounter }}>
+  (function () {
+    var failures = 0;
+    var counts = [];
+
+    function num(res) {
+      // counter.json formats counts with thin spaces, e.g. "1 234"
+      return parseInt(String(res.count).replace(/[^\d]/g, ''), 10) || 0;
+    }
+
+    function getCount(path) {
+      return fetch(goatcounter + '/counter/' + path + '.json')
+        .then(function (r) {
+          if (!r.ok) throw new Error(String(r.status));
+          return r.json();
+        })
+        .then(num);
+    }
+
+    getCount('TOTAL').then(
+      function (total) {
+        document.getElementById('stats-total').textContent = total.toLocaleString();
+      },
+      function () {
+        document.getElementById('stats-error').hidden = false;
+      }
+    );
+
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#stats-list li'));
+    Promise.all(
+      rows.map(function (row) {
+        return getCount(row.dataset.path).then(
+          function (c) {
+            counts.push({ row: row, count: c });
+          },
+          function () {
+            failures++;
+            row.querySelector('.stats-count').textContent = '–';
+          }
+        );
+      })
+    ).then(function () {
+      if (failures === rows.length) return;
+      var max = Math.max.apply(
+        null,
+        counts.map(function (c) {
+          return c.count;
+        })
+      );
+      counts.sort(function (a, b) {
+        return b.count - a.count;
+      });
+      var list = document.getElementById('stats-list');
+      counts.forEach(function (c) {
+        c.row.querySelector('.stats-count').textContent = c.count.toLocaleString();
+        c.row.querySelector('.stats-bar').style.width = max ? (c.count / max) * 100 + '%' : '0';
+        list.appendChild(c.row);
+      });
+    });
+  })();
+</script>
+
+<style>
+  .stats-page {
+    max-width: 640px;
+    padding-top: 40px;
+  }
+  .stats-page h1 {
+    margin: 0 0 24px;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    letter-spacing: -0.03em;
+  }
+  .stats-page h2 {
+    margin: 40px 0 12px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .stats-error {
+    background: var(--panel);
+    border: 1px solid rgba(244, 180, 95, 0.4);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+  .stats-error p { margin: 6px 0 0; color: var(--muted); }
+  .stats-error a { color: var(--accent); }
+  .stats-error code {
+    background: var(--panel-strong);
+    border-radius: 6px;
+    padding: 1px 6px;
+  }
+  .stats-total {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 26px;
+  }
+  .stats-total-num {
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats-total-label { color: var(--muted); }
+  .stats-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .stats-list li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.98rem;
+  }
+  .stats-bar {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    background: rgba(244, 180, 95, 0.14);
+    transition: width 0.5s ease;
+  }
+  .stats-label,
+  .stats-count { position: relative; }
+  .stats-count {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .stats-more {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .stats-more a { color: var(--accent); }
+</style>
