@@ -21,6 +21,20 @@ All copy lives in TypeScript, bilingual:
 Pages under `src/pages` are thin wrappers around shared sections in `src/sections`,
 rendered once per language (`/` and `/ru/`).
 
+## Analytics
+
+Visitor tracking via [GoatCounter](https://www.goatcounter.com) (free, no
+cookies). The snippet lives in `BaseLayout.astro`; the account URL is
+`site.goatcounter` in `src/data/site.ts`.
+
+- Dashboard on the site: <https://maxsapo.me/stats> (noindex, not linked
+  from the nav, but public to anyone with the URL).
+- Full dashboard (referrers, countries, graphs): <https://maxsapo.goatcounter.com>.
+
+One-time setup: sign up at goatcounter.com with code `maxsapo` (must match
+`site.goatcounter`), then in GoatCounter's Settings enable the visitor
+counter so `/stats` can read counts via the public `counter/*.json` API.
+
 ## TODO for Max
 
 - Confirm the public email in `src/data/site.ts` (currently `max@happyverse.ai`).

@@ -4,6 +4,9 @@ export const site = {
   // TODO(max): confirm which inbox you actually read. max@happyverse.ai is live today.
   email: 'max@happyverse.ai',
   location: 'San Francisco, CA',
+  // GoatCounter analytics. The account code must match the subdomain here;
+  // if "maxsapo" is taken at signup, change it in this one place.
+  goatcounter: 'https://maxsapo.goatcounter.com',
   social: {
     linkedin: 'https://www.linkedin.com/in/maxsapo/',
     instagram: 'https://www.instagram.com/delamax/',
