@@ -8,9 +8,10 @@ export const en = {
 
   nav: [
     { label: 'Life', href: '/#life' },
+    { label: 'Watch', href: '/#watch' },
+    { label: 'Writing', href: '/#writing' },
+    { label: 'Now', href: '/#now' },
     { label: 'Work', href: '/work' },
-    { label: 'Watch', href: '/watch' },
-    { label: 'Now', href: '/now' },
   ],
 
   meta: {
@@ -191,6 +192,24 @@ export const en = {
     cta: { label: 'Watch the videos', href: '/watch#music' },
   },
 
+  coaching: {
+    eyebrow: 'Work with me',
+    title: 'I coach the four dials.',
+    lede:
+      'Everything on this site — the frameworks, the career, the music — feeds one practice: helping ambitious people build a life that actually feels good. The first conversation is free.',
+    points: [
+      'A free 45-minute call: we map your love, health, work, and wealth dials and find the loudest one.',
+      'Built on HIPERFLOW, the nine-element system I designed at Happyverse — not vibes, a framework.',
+      'No slide decks, no upsell script. If I can help, I say how. If I can’t, I say who can.',
+    ],
+    cta: {
+      label: 'Book a free consultation',
+      href: `mailto:${site.email}?subject=Free%20coaching%20consultation`,
+    },
+    note: 'Too formal? Just DM me —',
+    noteLink: { label: '@delamax', href: site.social.instagram },
+  },
+
   california: {
     eyebrow: 'Off duty',
     title: 'Mostly outside.',
@@ -240,13 +259,37 @@ export const en = {
     eyebrow: 'Live feeds',
     title: 'Where the unpolished version lives.',
     lede: 'Reels, experiments, and hot takes — straight from the source.',
-    igHandle: '@delamax on Instagram',
-    xHandle: '@maxhappyverse on X',
-    xTimelineLabel: 'Posts from @maxhappyverse',
+    tiles: [
+      {
+        platform: 'Instagram · Reel',
+        caption: 'Starting my influencer career. Haters gonna hate, potatoes gonna potate.',
+        cta: 'Watch the reel',
+        href: 'https://www.instagram.com/reel/Db_EGFFxXPy/',
+        img: '/img/social/ig-reel1.jpg',
+        alt: 'Max on a motorcycle in the California sun',
+      },
+      {
+        platform: 'Instagram · Reel',
+        caption: 'Karaoke nights, dance experiments, and other things a CFA charter does not prepare you for.',
+        cta: 'Watch the reel',
+        href: 'https://www.instagram.com/reel/DcaXLhVxStx/',
+        img: '/img/social/ig-reel2.jpg',
+        alt: 'Max in front of the Universal globe',
+      },
+      {
+        platform: 'X',
+        caption: 'Hot takes on TPUs, happiness, and everything in between.',
+        cta: 'Follow @maxhappyverse',
+        href: site.social.x,
+        img: '',
+        alt: '',
+      },
+    ],
   },
 
   watch: {
     eyebrow: 'On camera',
+    seeAll: 'All videos →',
     title: 'Talks, interviews, demos, and one MBA application that rhymes.',
     lede:
       'Everything here is public and verified — pulled straight from my channel and the Happyverse channel. If you have hosted me somewhere that is missing, send the link.',

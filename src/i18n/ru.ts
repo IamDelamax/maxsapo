@@ -9,9 +9,10 @@ export const ru: Content = {
 
   nav: [
     { label: 'Жизнь', href: '/ru/#life' },
+    { label: 'Видео', href: '/ru/#watch' },
+    { label: 'Тексты', href: '/ru/#writing' },
+    { label: 'Сейчас', href: '/ru/#now' },
     { label: 'Работа', href: '/ru/work' },
-    { label: 'Видео', href: '/ru/watch' },
-    { label: 'Сейчас', href: '/ru/now' },
   ],
 
   meta: {
@@ -192,6 +193,24 @@ export const ru: Content = {
     cta: { label: 'Смотреть видео', href: '/ru/watch#music' },
   },
 
+  coaching: {
+    eyebrow: 'Поработаем вместе',
+    title: 'Я коучу четыре тумблера.',
+    lede:
+      'Всё на этом сайте — фреймворки, карьера, музыка — питает одну практику: помогать амбициозным людям строить жизнь, которая реально ощущается хорошо. Первый разговор — бесплатно.',
+    points: [
+      'Бесплатный 45-минутный созвон: разложим твои любовь, здоровье, работу и деньги и найдём самый громкий тумблер.',
+      'В основе — HIPERFLOW, система из девяти элементов, которую я собрал в Happyverse. Не вайбы, а фреймворк.',
+      'Без презентаций и скриптов допродаж. Если могу помочь — скажу как. Если нет — скажу, кто может.',
+    ],
+    cta: {
+      label: 'Записаться на бесплатную консультацию',
+      href: `mailto:${site.email}?subject=%D0%91%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F`,
+    },
+    note: 'Слишком официально? Просто напиши в директ —',
+    noteLink: { label: '@delamax', href: site.social.instagram },
+  },
+
   california: {
     eyebrow: 'Вне работы',
     title: 'В основном на улице.',
@@ -241,13 +260,37 @@ export const ru: Content = {
     eyebrow: 'Живые ленты',
     title: 'Где живёт неотполированная версия.',
     lede: 'Рилсы, эксперименты и горячие мнения — из первых рук.',
-    igHandle: '@delamax в Instagram',
-    xHandle: '@maxhappyverse в X',
-    xTimelineLabel: 'Посты @maxhappyverse',
+    tiles: [
+      {
+        platform: 'Instagram · Reel',
+        caption: 'Начинаю карьеру инфлюенсера. Haters gonna hate, potatoes gonna potate.',
+        cta: 'Смотреть рилс',
+        href: 'https://www.instagram.com/reel/Db_EGFFxXPy/',
+        img: '/img/social/ig-reel1.jpg',
+        alt: 'Макс на мотоцикле под калифорнийским солнцем',
+      },
+      {
+        platform: 'Instagram · Reel',
+        caption: 'Караоке, танцевальные эксперименты и другие вещи, к которым чартер CFA не готовит.',
+        cta: 'Смотреть рилс',
+        href: 'https://www.instagram.com/reel/DcaXLhVxStx/',
+        img: '/img/social/ig-reel2.jpg',
+        alt: 'Макс перед глобусом Universal',
+      },
+      {
+        platform: 'X',
+        caption: 'Горячие мнения о TPU, счастье и всём, что между ними.',
+        cta: 'Подписаться на @maxhappyverse',
+        href: site.social.x,
+        img: '',
+        alt: '',
+      },
+    ],
   },
 
   watch: {
     eyebrow: 'В кадре',
+    seeAll: 'Все видео →',
     title: 'Выступления, интервью, демо и одна заявка на MBA в рифму.',
     lede:
       'Всё здесь публичное и проверенное — собрано прямо с моего канала и канала Happyverse. Если ты меня где-то записывал и этого тут нет — пришли ссылку.',

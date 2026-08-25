@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site } from '../data/site';
 import { getContent, altHref, type Lang } from '../i18n';
 import MobileNav from '../components/MobileNav.astro';
+import SocialIcons from '../components/SocialIcons.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 import { ClientRouter } from 'astro:transitions';
 
@@ -135,14 +136,12 @@ const jsonLd = {
     </main>
     <footer class="footer">
       <div class="container footer-inner">
-        <span>© {new Date().getFullYear()} Max Sapo · {t.footer.tagline}</span>
-        <div class="footer-links">
-          <a href={site.social.instagram} class="footer-link" target="_blank" rel="noopener noreferrer">@delamax</a>
-          <span>·</span>
-          <a href={site.social.linkedin} class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <span>·</span>
-          <a href={site.social.youtube} class="footer-link" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <div class="footer-id">
+          <span class="footer-name">Max Sapo</span>
+          <span class="footer-tagline">{t.footer.tagline}</span>
+          <span class="footer-rights">© {new Date().getFullYear()} Max Sapo. {t.footer.rights}</span>
         </div>
+        <SocialIcons size={20} />
       </div>
     </footer>
   </body>
