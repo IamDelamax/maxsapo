@@ -61,6 +61,7 @@ const jsonLd = {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" hreflang={lang === 'en' ? 'ru' : 'en'} href={new URL(switchHref, site.url).toString()} />
 
     <meta property="og:site_name" content={site.name} />
