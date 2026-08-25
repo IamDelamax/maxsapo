@@ -9,19 +9,23 @@ const { lang } = Astro.props;
 const t = getContent(lang);
 const c = t.check;
 
-const COLORS: Record<string, string> = {
-  love: '#e8447c',
-  health: '#16a34a',
-  work: '#f59e0b',
-  wealth: '#0284c7',
+const COLORS: Record<string, { main: string; light: string }> = {
+  love: { main: '#e8447c', light: '#f77aa5' },
+  health: { main: '#16a34a', light: '#4ecb7d' },
+  work: { main: '#f59e0b', light: '#fbc353' },
+  wealth: { main: '#0284c7', light: '#41b0e8' },
 };
 
 const quadrants = t.pillars.items.map((p) => ({
   key: p.key,
   label: p.label,
   href: p.href,
-  color: COLORS[p.key],
+  color: COLORS[p.key].main,
+  light: COLORS[p.key].light,
 }));
+
+// score rings between hub (36) and rim (100)
+const rings = [1, 2, 3, 4].map((i) => 36 + (i / 5) * 64);
 
 const config = {
   email: site.email,
@@ -68,24 +72,45 @@ const config = {
         <a class="button" data-open href="/#life"></a>
       </div>
     </div>
+
     <div class="check-wheel" aria-hidden="true">
-      <svg viewBox="-112 -112 224 224" data-wheel>
-        <circle r="100" class="wheel-grid" />
-        <circle r="70" class="wheel-grid" />
-        <circle r="40" class="wheel-grid" />
-        <line x1="-104" y1="0" x2="104" y2="0" class="wheel-grid" />
-        <line x1="0" y1="-104" x2="0" y2="104" class="wheel-grid" />
+      <div class="wheel-wrap">
+        <svg viewBox="-118 -118 236 236" data-wheel>
+          <defs>
+            {quadrants.map((q) => (
+              <radialGradient id={`wg-${q.key}`} cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse">
+                <stop offset="30%" stop-color={q.light} />
+                <stop offset="100%" stop-color={q.color} />
+              </radialGradient>
+            ))}
+            <filter id="wheel-shadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#785020" flood-opacity="0.22" />
+            </filter>
+          </defs>
+
+          <g data-ghosts></g>
+
+          <g class="wheel-rings">
+            {rings.map((r) => <circle r={r} />)}
+          </g>
+
+          <g data-segs filter="url(#wheel-shadow)"></g>
+
+          <circle class="wheel-hub" r="31" />
+          <text class="wheel-avg" text-anchor="middle" y="6">
+            <tspan data-avg font-size="17" font-weight="800">–</tspan>
+            <tspan font-size="8.5" dx="1.5" class="wheel-avg-denom">/5</tspan>
+          </text>
+        </svg>
+
         {quadrants.map((q, i) => (
-          <path
-            data-seg={q.key}
-            transform={`rotate(${i * 90 - 90})`}
-            fill={q.color}
-            fill-opacity="0.82"
-            stroke="#ffffff"
-            stroke-width="2"
-          />
+          <span
+            class={`wheel-chip wheel-chip-${['tr', 'br', 'bl', 'tl'][i]}`}
+            style={`color:${q.color}`}
+            data-chip={q.key}
+          >{q.label}</span>
         ))}
-      </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -98,39 +123,114 @@ const config = {
     const config = JSON.parse(root.dataset.config || '{}');
     const STORAGE = 'hiperflow.home';
 
+    const HUB = 36;
+    const RIM = 100;
+    const PAD = (4.2 * Math.PI) / 180; // angular gap on each side of a quadrant
+    const CORNER = 9; // outer corner radius
+
     const rows = Array.from(root.querySelectorAll<HTMLElement>('.check-row'));
     const loudestEl = root.querySelector<HTMLElement>('[data-loudest]')!;
     const ctaEl = root.querySelector<HTMLAnchorElement>('[data-cta]')!;
     const openEl = root.querySelector<HTMLAnchorElement>('[data-open]')!;
+    const avgEl = root.querySelector<SVGTSpanElement>('[data-avg]')!;
+    const ghostsG = root.querySelector<SVGGElement>('[data-ghosts]')!;
+    const segsG = root.querySelector<SVGGElement>('[data-segs]')!;
+
+    const polar = (r: number, a: number) => `${(r * Math.cos(a)).toFixed(2)} ${(r * Math.sin(a)).toFixed(2)}`;
+
+    // Quarter sector with rounded outer corners; center is covered by the hub.
+    function sectorPath(r: number, a0: number, a1: number, corner: number) {
+      const c = Math.min(corner, ((a1 - a0) * r) / 2.4, r - HUB);
+      const d = r - c;
+      const phi = Math.asin(c / d);
+      const edge = d * Math.cos(phi);
+      return [
+        'M 0 0',
+        `L ${polar(edge, a0)}`,
+        `A ${c} ${c} 0 0 1 ${polar(r, a0 + phi)}`,
+        `A ${r} ${r} 0 0 1 ${polar(r, a1 - phi)}`,
+        `A ${c} ${c} 0 0 1 ${polar(edge, a1)}`,
+        'Z',
+      ].join(' ');
+    }
+
+    const NS = 'http://www.w3.org/2000/svg';
+    const angles = (i: number) => {
+      const base = (-90 + i * 90) * (Math.PI / 180);
+      return [base + PAD, base + Math.PI / 2 - PAD] as const;
+    };
+
+    const segEls: Record<string, SVGPathElement> = {};
+    config.quadrants.forEach((q: any, i: number) => {
+      const [a0, a1] = angles(i);
+      const ghost = document.createElementNS(NS, 'path');
+      ghost.setAttribute('d', sectorPath(RIM, a0, a1, CORNER));
+      ghost.setAttribute('class', 'wheel-ghost');
+      ghost.setAttribute('fill', `url(#wg-${q.key})`);
+      ghostsG.appendChild(ghost);
+
+      const seg = document.createElementNS(NS, 'path');
+      seg.setAttribute('fill', `url(#wg-${q.key})`);
+      segsG.appendChild(seg);
+      segEls[q.key] = seg;
+    });
 
     let scores: Record<string, number> = {};
     try {
       scores = JSON.parse(localStorage.getItem(STORAGE) || '{}');
     } catch {}
 
+    const radius = (v: number) => HUB + (v / 5) * (RIM - HUB);
+    const cur: Record<string, number> = {};
+    config.quadrants.forEach((q: any) => (cur[q.key] = radius(scores[q.key] ?? 3)));
+
+    let raf = 0;
+    function animate() {
+      cancelAnimationFrame(raf);
+      const start = performance.now();
+      const from = { ...cur };
+      const to: Record<string, number> = {};
+      config.quadrants.forEach((q: any) => (to[q.key] = radius(scores[q.key] ?? 3)));
+      const DUR = 320;
+      const tick = (now: number) => {
+        const p = Math.min(1, (now - start) / DUR);
+        const e = 1 - Math.pow(1 - p, 3);
+        config.quadrants.forEach((q: any, i: number) => {
+          cur[q.key] = from[q.key] + (to[q.key] - from[q.key]) * e;
+          const [a0, a1] = angles(i);
+          segEls[q.key].setAttribute('d', sectorPath(cur[q.key], a0, a1, CORNER));
+        });
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }
+
     const verdict = (v: number) =>
       v <= 2 ? config.verdicts.pain : v <= 4 ? config.verdicts.growth : config.verdicts.great;
-
-    const seg = (r: number) => `M 0 0 L ${r} 0 A ${r} ${r} 0 0 1 0 ${r} Z`;
 
     function render() {
       let minKey = '';
       let minVal = 6;
+      let sum = 0;
       for (const q of config.quadrants) {
         const v = scores[q.key] ?? 3;
+        sum += v;
         const row = rows.find((r) => r.dataset.qkey === q.key);
         if (row) {
           const input = row.querySelector<HTMLInputElement>('[data-score]')!;
           if (Number(input.value) !== v) input.value = String(v);
           row.querySelector<HTMLElement>('[data-verdict]')!.textContent = `${v}/5 · ${verdict(v)}`;
         }
-        const path = root.querySelector<SVGPathElement>(`[data-seg="${q.key}"]`);
-        if (path) path.setAttribute('d', seg(26 + (v / 5) * 74));
+        const chip = root.querySelector<HTMLElement>(`[data-chip="${q.key}"]`);
+        if (chip) chip.textContent = `${q.label} · ${v}`;
         if (v < minVal) {
           minVal = v;
           minKey = q.key;
         }
       }
+      avgEl.textContent = (Math.round((sum / config.quadrants.length) * 10) / 10).toString();
+      animate();
+
       const minQ = config.quadrants.find((q: any) => q.key === minKey);
       if (minVal >= 5) {
         loudestEl.textContent = config.balanced;
