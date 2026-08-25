@@ -69,6 +69,22 @@ const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
     </div>
   </section>
 
+  <section class="container section california-band" aria-label={t.california.title}>
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">{t.california.eyebrow}</p>
+        <h2>{t.california.title}</h2>
+      </div>
+    </div>
+    <div class="photo-strip">
+      {t.california.photos.map((p) => (
+        <figure class="photo-card">
+          <img src={p.src} alt={p.alt} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
   <section class="container section delamax-band" id="delamax">
     <div class="delamax-inner">
       <div class="delamax-copy">
@@ -107,4 +123,77 @@ const rapVideo = videos.find((v) => v.id === 'hbs-essay')!;
       </div>
     </div>
   </section>
+
+  <section class="container section" id="writing">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">{t.writing.eyebrow}</p>
+        <h2>{t.writing.title}</h2>
+      </div>
+      <p>{t.writing.lede}</p>
+    </div>
+    <div class="grid two">
+      {t.writing.items.map((item) => (
+        <a class="card writing-item" href={item.href} target="_blank" rel="noopener noreferrer">
+          <div class="card-meta">{item.source}</div>
+          <h3>{item.title}</h3>
+          <p>{item.note}</p>
+        </a>
+      ))}
+      <a class="card writing-item substack-card" href={t.writing.substack.href} target="_blank" rel="noopener noreferrer">
+        <div class="card-meta">Substack</div>
+        <h3>{t.writing.substack.title}</h3>
+        <p>{t.writing.substack.body}</p>
+        <span class="pillar-link">{t.writing.substack.cta} →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="container section" id="follow">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">{t.follow.eyebrow}</p>
+        <h2>{t.follow.title}</h2>
+      </div>
+      <p>{t.follow.lede}</p>
+    </div>
+    <div class="follow-grid">
+      <div class="embed-col">
+        <p class="block-title"><a href={site.social.instagram} target="_blank" rel="noopener noreferrer">{t.follow.igHandle} ↗</a></p>
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/reel/Db_EGFFxXPy/"
+          data-instgrm-version="14"
+        ></blockquote>
+      </div>
+      <div class="embed-col">
+        <p class="block-title"><a href={site.social.instagram} target="_blank" rel="noopener noreferrer">{t.follow.igHandle} ↗</a></p>
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/reel/DcaXLhVxStx/"
+          data-instgrm-version="14"
+        ></blockquote>
+      </div>
+      <div class="embed-col">
+        <p class="block-title"><a href={site.social.x} target="_blank" rel="noopener noreferrer">{t.follow.xHandle} ↗</a></p>
+        <a
+          class="twitter-timeline"
+          data-theme="dark"
+          data-height="560"
+          data-dnt="true"
+          href="https://twitter.com/maxhappyverse"
+        >{t.follow.xTimelineLabel}</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline src="https://www.instagram.com/embed.js" async></script>
+  <script is:inline src="https://platform.twitter.com/widgets.js" async charset="utf-8"></script>
+  <script is:inline>
+    // Re-render third-party embeds after Astro view transitions swap the DOM.
+    document.addEventListener('astro:page-load', () => {
+      window.instgrm?.Embeds?.process?.();
+      window.twttr?.widgets?.load?.();
+    });
+  </script>
 </BaseLayout>

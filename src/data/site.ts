@@ -13,6 +13,7 @@ export const site = {
     youtube: 'https://www.youtube.com/@MaxSapozhnikov',
     github: 'https://github.com/IamDelamax',
     x: 'https://x.com/maxhappyverse',
+    substack: 'https://substack.com/@delamax',
   },
   ventures: {
     happyverse: 'https://happyverse.ai',

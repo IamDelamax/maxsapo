@@ -192,6 +192,60 @@ export const ru: Content = {
     cta: { label: 'Смотреть видео', href: '/ru/watch#music' },
   },
 
+  california: {
+    eyebrow: 'Вне работы',
+    title: 'В основном на улице.',
+    photos: [
+      { src: '/img/california/ca1.jpg', alt: 'Макс на Трежер-Айленде на фоне Бэй-бриджа и Сан-Франциско' },
+      { src: '/img/california/ca2.jpg', alt: 'Макс на пляже в Кармеле с кофе' },
+      { src: '/img/california/ca3.jpg', alt: 'Макс смеётся на скалистом тихоокеанском берегу' },
+      { src: '/img/california/ca4.jpg', alt: 'Макс у океана на закате' },
+      { src: '/img/california/ca5.jpg', alt: 'Макс на туманном пляже Северной Калифорнии' },
+      { src: '/img/california/ca6.jpg', alt: 'Макс под розовым вечерним небом и пальмами' },
+    ],
+  },
+
+  writing: {
+    eyebrow: 'Тексты',
+    title: 'Написанное — и запущенное.',
+    lede: 'Официальные посты Google, которые я писал или соавторствовал, и блог, где я думаю вслух.',
+    items: [
+      {
+        title: 'Google unveils world’s largest publicly available ML cluster',
+        source: 'Google Cloud Blog',
+        note: 'Запуск Cloud TPU v4 Pods — до 9 эксафлопс суммарного компьюта; машины, чей go-to-market я вёл.',
+        href: 'https://cloud.google.com/blog/products/compute/google-unveils-worlds-largest-publicly-available-ml-cluster',
+      },
+      {
+        title: 'Cloud TPU VMs are generally available',
+        source: 'Google Cloud Blog',
+        note: 'Запуск архитектуры, которая позволила исследователям запускать свой код прямо на хост-машинах TPU.',
+        href: 'https://cloud.google.com/blog/products/compute/cloud-tpu-vms-are-generally-available',
+      },
+      {
+        title: 'Systems engineering playbook: optimizing Qwen 3.5-397B MoE on Ironwood (TPU7x)',
+        source: 'Google Developers Blog',
+        note: 'Как мы укладываем mixture-of-experts модель на 397 млрд параметров в TPU седьмого поколения.',
+        href: 'https://developers.googleblog.com/systems-engineering-playbook-optimizing-qwen-35-397b-moe-on-ironwood-tpu7x/',
+      },
+    ],
+    substack: {
+      title: 'Delamax в Substack',
+      body: 'Эссе между запусками — системы жизни, AI и всё, чего касаются четыре тумблера.',
+      cta: 'Читать в Substack',
+      href: site.social.substack,
+    },
+  },
+
+  follow: {
+    eyebrow: 'Живые ленты',
+    title: 'Где живёт неотполированная версия.',
+    lede: 'Рилсы, эксперименты и горячие мнения — из первых рук.',
+    igHandle: '@delamax в Instagram',
+    xHandle: '@maxhappyverse в X',
+    xTimelineLabel: 'Посты @maxhappyverse',
+  },
+
   watch: {
     eyebrow: 'В кадре',
     title: 'Выступления, интервью, демо и одна заявка на MBA в рифму.',

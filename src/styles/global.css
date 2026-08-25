@@ -571,3 +571,56 @@ body.nav-locked { overflow: hidden; }
 @media (min-width: 901px) {
   .mobile-nav-wrapper { display: none; }
 }
+
+/* ---------- california photo strip ---------- */
+.california-band { overflow: hidden; }
+.photo-strip {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.photo-card {
+  margin: 0;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.photo-card img {
+  height: 300px;
+  width: auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  transition: transform 180ms ease;
+}
+.photo-card:hover img { transform: translateY(-3px) scale(1.01); }
+@media (max-width: 640px) {
+  .photo-card img { height: 220px; }
+}
+
+/* ---------- writing ---------- */
+.writing-item h3 { font-size: 1.15rem; line-height: 1.3; }
+.substack-card { border-color: rgba(255, 103, 25, 0.35); }
+.substack-card .card-meta { color: #ff6719; }
+.substack-card:hover { border-color: rgba(255, 103, 25, 0.6); }
+
+/* ---------- follow / embeds ---------- */
+.follow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+.embed-col { min-width: 0; }
+.embed-col .block-title { margin: 0 0 10px; }
+.embed-col .instagram-media,
+.embed-col .twitter-timeline {
+  border-radius: 16px !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+@media (max-width: 960px) {
+  .follow-grid { grid-template-columns: 1fr; }
+}

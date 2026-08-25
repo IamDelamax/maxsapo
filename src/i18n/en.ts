@@ -191,6 +191,60 @@ export const en = {
     cta: { label: 'Watch the videos', href: '/watch#music' },
   },
 
+  california: {
+    eyebrow: 'Off duty',
+    title: 'Mostly outside.',
+    photos: [
+      { src: '/img/california/ca1.jpg', alt: 'Max at Treasure Island with the Bay Bridge and San Francisco skyline behind' },
+      { src: '/img/california/ca2.jpg', alt: 'Max on the beach in Carmel with a coffee' },
+      { src: '/img/california/ca3.jpg', alt: 'Max laughing on the rocky Pacific coast' },
+      { src: '/img/california/ca4.jpg', alt: 'Max at the ocean at sunset' },
+      { src: '/img/california/ca5.jpg', alt: 'Max on a foggy Northern California beach' },
+      { src: '/img/california/ca6.jpg', alt: 'Max under a pink evening sky and palm trees' },
+    ],
+  },
+
+  writing: {
+    eyebrow: 'Writing',
+    title: 'Things I wrote that shipped.',
+    lede: 'Official Google posts I authored or co-authored, and the blog where I think out loud.',
+    items: [
+      {
+        title: 'Google unveils world’s largest publicly available ML cluster',
+        source: 'Google Cloud Blog',
+        note: 'The Cloud TPU v4 Pods launch — up to 9 exaflops of aggregate compute, and the machines I ran go-to-market for.',
+        href: 'https://cloud.google.com/blog/products/compute/google-unveils-worlds-largest-publicly-available-ml-cluster',
+      },
+      {
+        title: 'Cloud TPU VMs are generally available',
+        source: 'Google Cloud Blog',
+        note: 'The architecture launch that let researchers run their own code on the TPU host machines.',
+        href: 'https://cloud.google.com/blog/products/compute/cloud-tpu-vms-are-generally-available',
+      },
+      {
+        title: 'Systems engineering playbook: optimizing Qwen 3.5-397B MoE on Ironwood (TPU7x)',
+        source: 'Google Developers Blog',
+        note: 'How we squeeze a 397B-parameter mixture-of-experts model onto seventh-generation TPUs.',
+        href: 'https://developers.googleblog.com/systems-engineering-playbook-optimizing-qwen-35-397b-moe-on-ironwood-tpu7x/',
+      },
+    ],
+    substack: {
+      title: 'Delamax on Substack',
+      body: 'Essays between the launches — life systems, AI, and everything the four dials touch.',
+      cta: 'Read on Substack',
+      href: site.social.substack,
+    },
+  },
+
+  follow: {
+    eyebrow: 'Live feeds',
+    title: 'Where the unpolished version lives.',
+    lede: 'Reels, experiments, and hot takes — straight from the source.',
+    igHandle: '@delamax on Instagram',
+    xHandle: '@maxhappyverse on X',
+    xTimelineLabel: 'Posts from @maxhappyverse',
+  },
+
   watch: {
     eyebrow: 'On camera',
     title: 'Talks, interviews, demos, and one MBA application that rhymes.',
